@@ -12,9 +12,4 @@ public class UserRegisterDTO {
     private String userEmail;
 
     private String userPw;
-
-    private String userPhone;
-
-    private String userBirthday;
-
 }

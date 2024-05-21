@@ -26,13 +26,6 @@ public class User {
     @Column(name = "user_pw")
     private String userPw;
 
-    @Column(name = "user_phone")
-    private String userPhone;
-
-    @Column(name = "user_birthday")
-    private String userBirthday;
-
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.ROLE_NOT_PERMITTED;
 }
+
+
