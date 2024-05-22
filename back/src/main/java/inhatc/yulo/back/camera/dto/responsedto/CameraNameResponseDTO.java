@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CameraTodayDetectionDTO {
-    private long detectionCount;
+public class CameraNameResponseDTO {
+    private String cameraName;
 }

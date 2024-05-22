@@ -1,7 +1,8 @@
 package inhatc.yulo.back.camera.controller;
 
-import inhatc.yulo.back.camera.dto.requestdto.CameraTodayDetection;
-import inhatc.yulo.back.camera.dto.responsedto.CameraTodayDetectionDTO;
+import inhatc.yulo.back.camera.dto.requestdto.CameraNameRequestDTO;
+import inhatc.yulo.back.camera.dto.requestdto.CameraTodayDetectionRequestDTO;
+import inhatc.yulo.back.camera.service.CameraNameService;
 import inhatc.yulo.back.camera.service.CameraTodayDetectionService;
 import inhatc.yulo.back.resultdto.ResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,17 @@ public class CameraController {
 
     @Autowired
     private CameraTodayDetectionService cameraTodayDetectionService;
+    @Autowired
+    private CameraNameService cameraNameService;
 
     @PostMapping("/todayDetection")
-    public ResultDTO<?> cameraTodayDetectionList(@RequestBody CameraTodayDetection cameraTodayDetection) {
+    public ResultDTO<?> cameraTodayDetectionList(@RequestBody CameraTodayDetectionRequestDTO cameraTodayDetectionRequestDTO) {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data",
-                cameraTodayDetectionService.findCameraTodayDetection(cameraTodayDetection), "data");
+                cameraTodayDetectionService.findCameraTodayDetection(cameraTodayDetectionRequestDTO), "data");
+    }
+
+    @PostMapping("/cameraName")
+    public ResultDTO<?> cameraNameList(@RequestBody CameraNameRequestDTO cameraNameRequestDTO) {
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data", cameraNameService.findCameraName(cameraNameRequestDTO), "data");
     }
 }

@@ -1,15 +1,16 @@
 package inhatc.yulo.back.camera.service;
 
 
-import inhatc.yulo.back.camera.dto.requestdto.CameraTodayDetection;
-import inhatc.yulo.back.camera.dto.responsedto.CameraTodayDetectionDTO;
+import inhatc.yulo.back.camera.dto.requestdto.CameraTodayDetectionRequestDTO;
+import inhatc.yulo.back.camera.dto.responsedto.CameraTodayDetectionResponseDTO;
 import inhatc.yulo.back.camera.repository.CameraRepository;
 import inhatc.yulo.back.yoloDetection.entity.YOLODetection;
 import inhatc.yulo.back.yoloDetection.repository.YOLODetectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -21,19 +22,25 @@ public class CameraTodayDetectionService {
     @Autowired
     private YOLODetectionRepository yoloDetectionRepository;
 
-    public CameraTodayDetectionDTO findCameraTodayDetection(CameraTodayDetection cameraTodayDetection) {
-        System.out.println(cameraTodayDetection.getUserId());
-        System.out.println(cameraTodayDetection.getCameraName());
+    public CameraTodayDetectionResponseDTO findCameraTodayDetection(CameraTodayDetectionRequestDTO cameraTodayDetectionRequestDTO) {
         List<YOLODetection> yoloDetections = yoloDetectionRepository.findDetectionsByUserIdAndCameraName(
-                cameraTodayDetection.getUserId(), cameraTodayDetection.getCameraName());
-        System.out.println(yoloDetections);
-        if (!yoloDetections.isEmpty()) {
-            CameraTodayDetectionDTO cameraTodayDetectionDTO = new CameraTodayDetectionDTO();
+                cameraTodayDetectionRequestDTO.getUserId(), cameraTodayDetectionRequestDTO.getCameraName());
 
-            cameraTodayDetectionDTO.setDetectionCount(yoloDetections.size());
-            return cameraTodayDetectionDTO;
+        LocalDate today = LocalDate.now(ZoneId.systemDefault());
+        int detectionCount = 0;
+
+        for (YOLODetection detection : yoloDetections) {
+            if (detection.getYoloDetectionDate().toLocalDate().isEqual(today)) {
+                detectionCount++;
+            }
         }
-        System.out.println("null");
+
+        if (detectionCount > 0) {
+            CameraTodayDetectionResponseDTO cameraTodayDetectionResponseDTO = new CameraTodayDetectionResponseDTO();
+            cameraTodayDetectionResponseDTO.setDetectionCount(detectionCount);
+            return cameraTodayDetectionResponseDTO;
+        }
+
         return null;
     }
 }

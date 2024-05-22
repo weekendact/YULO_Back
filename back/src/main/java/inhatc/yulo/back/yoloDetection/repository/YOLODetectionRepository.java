@@ -13,6 +13,5 @@ import java.util.List;
 public interface YOLODetectionRepository extends JpaRepository<YOLODetection, Long> {
     @Query("SELECT yd FROM YOLODetection yd JOIN yd.camera c WHERE c.user.userId = :userId AND c.cameraName = :cameraName")
     List<YOLODetection> findDetectionsByUserIdAndCameraName(@Param("userId") Long userId, @Param("cameraName") String cameraName);
-
 }
 
