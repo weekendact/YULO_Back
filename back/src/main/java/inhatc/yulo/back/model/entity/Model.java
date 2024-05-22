@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Primary;
 
 @Entity
 @Data
@@ -22,7 +21,10 @@ public class Model {
     private String modelName;
 
     @Column(name = "model_accuracy")
-    private Long modelAccuracy;
+    private Double modelAccuracy;
+
+    @Column(name = "model_all_user")
+    private Long modelAllUser;
 
     @ManyToOne
     @JoinColumn(name = "camera_id", referencedColumnName = "camera_id")
