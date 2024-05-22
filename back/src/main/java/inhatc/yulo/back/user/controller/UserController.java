@@ -3,6 +3,7 @@ package inhatc.yulo.back.user.controller;
 import inhatc.yulo.back.resultdto.ResultDTO;
 import inhatc.yulo.back.user.dto.requestdto.UserLoginDTO;
 import inhatc.yulo.back.user.dto.requestdto.UserRegisterDTO;
+import inhatc.yulo.back.user.dto.requestdto.UserTokenLoginDTO;
 import inhatc.yulo.back.user.service.UserSigninService;
 import inhatc.yulo.back.user.service.UserSignupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,21 @@ public class UserController {
     @Autowired
     private UserSigninService userSigninService;
 
-    @PostMapping("/Signup")
+    @PostMapping("/signup")
     public ResultDTO<?> userAdd(@RequestBody UserRegisterDTO userRegisterDTO) {
         return userSignupService.addUser(userRegisterDTO)?
                 new ResultDTO<>().makeResult(HttpStatus.OK, "data"):
                 new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "data");
     }
 
-    @PostMapping("/Signin")
+    @PostMapping("/token/signin")
+    public ResultDTO<?> userSignin(@RequestBody UserTokenLoginDTO userTokenLoginDTO) {
+        return userSigninService.findUser(userTokenLoginDTO)?
+                new ResultDTO<>().makeResult(HttpStatus.OK, "data"):
+                new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "data");
+    }
+
+    @PostMapping("/signin")
     public ResultDTO<?> userSave(@RequestBody UserLoginDTO userLoginDTO) {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", userSigninService.findUser(userLoginDTO), "userId");
     }

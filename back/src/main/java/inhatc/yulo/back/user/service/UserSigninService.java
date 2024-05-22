@@ -1,6 +1,7 @@
 package inhatc.yulo.back.user.service;
 
 import inhatc.yulo.back.user.dto.requestdto.UserLoginDTO;
+import inhatc.yulo.back.user.dto.requestdto.UserTokenLoginDTO;
 import inhatc.yulo.back.user.entity.User;
 import inhatc.yulo.back.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class UserSigninService {
             }
         }
         return null;
+    }
+
+    public boolean findUser(UserTokenLoginDTO userTokenLoginDTO) {
+        Optional<User> optionalUser = userRepository.findById(userTokenLoginDTO.getUserId());
+        return optionalUser.isPresent();
     }
 }
