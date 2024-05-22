@@ -27,7 +27,7 @@ public class CameraTodayDetectionService {
                 cameraTodayDetectionRequestDTO.getUserId(), cameraTodayDetectionRequestDTO.getCameraName());
 
         LocalDate today = LocalDate.now(ZoneId.systemDefault());
-        int detectionCount = 0;
+        long detectionCount = 0;
 
         for (YOLODetection detection : yoloDetections) {
             if (detection.getYoloDetectionDate().toLocalDate().isEqual(today)) {

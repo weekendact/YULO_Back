@@ -7,10 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 public interface CameraRepository extends JpaRepository<Camera, Long> {
     @Query("SELECT c FROM Camera c WHERE c.user.userId = :userId")
     List<Camera> findByUserId(@Param("userId") Long userId);
+
+    Optional<Camera> findByCameraId(Long cameraId);
 }

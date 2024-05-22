@@ -1,25 +1,27 @@
 package inhatc.yulo.back.camera.controller;
 
 import inhatc.yulo.back.camera.dto.requestdto.CameraNameRequestDTO;
+import inhatc.yulo.back.camera.dto.requestdto.CameraRankingRequestDTO;
 import inhatc.yulo.back.camera.dto.requestdto.CameraTodayDetectionRequestDTO;
 import inhatc.yulo.back.camera.service.CameraNameService;
+import inhatc.yulo.back.camera.service.CameraRankingService;
 import inhatc.yulo.back.camera.service.CameraTodayDetectionService;
 import inhatc.yulo.back.resultdto.ResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("camera")
+@CrossOrigin
 public class CameraController {
 
     @Autowired
     private CameraTodayDetectionService cameraTodayDetectionService;
     @Autowired
     private CameraNameService cameraNameService;
+    @Autowired
+    private CameraRankingService cameraRankingService;
 
     @PostMapping("/todayDetection")
     public ResultDTO<?> cameraTodayDetectionList(@RequestBody CameraTodayDetectionRequestDTO cameraTodayDetectionRequestDTO) {
@@ -30,5 +32,10 @@ public class CameraController {
     @PostMapping("/cameraName")
     public ResultDTO<?> cameraNameList(@RequestBody CameraNameRequestDTO cameraNameRequestDTO) {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", cameraNameService.findCameraName(cameraNameRequestDTO), "data");
+    }
+
+    @PostMapping("/cameraRanking")
+    public ResultDTO<?> cameraRankingList(@RequestBody CameraRankingRequestDTO cameraRankingRequestDTO) {
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data", cameraRankingService.findCameraRanking(cameraRankingRequestDTO), "data");
     }
 }

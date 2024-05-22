@@ -6,5 +6,5 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CameraTodayDetectionResponseDTO {
-    private long detectionCount;
+    private Long detectionCount;
 }
