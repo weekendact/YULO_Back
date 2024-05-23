@@ -20,7 +20,7 @@ public class Detection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "detection_id")
-    private Long yoloDetectionId;
+    private Long detectionId;
 
     @ManyToOne
     @JoinColumn(name = "camera_id", referencedColumnName = "camera_id")
@@ -37,9 +37,7 @@ public class Detection {
     @Column(name = "detection_date")
     private LocalDateTime DetectionDate;
 
-    @Column(name = "detection_count")
-    private Long DetectionCount;
-
-
+    @Column(name = "detection_server_path")
+    private String detectionServerPath;
 
 }

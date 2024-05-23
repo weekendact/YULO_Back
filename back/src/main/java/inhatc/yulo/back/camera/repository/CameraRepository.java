@@ -16,4 +16,7 @@ public interface CameraRepository extends JpaRepository<Camera, Long> {
     List<Camera> findByUserId(@Param("userId") Long userId);
 
     Optional<Camera> findByCameraId(Long cameraId);
+
+    @Query("DELETE FROM Camera c WHERE c.cameraName = :cameraName AND c.user.userId = :userId")
+    void deleteCameraByCameraNameAndUserId(@Param("cameraName") String cameraName, @Param("userId") Long userId);
 }

@@ -1,16 +1,13 @@
 package inhatc.yulo.back.detection.dto.responseDTO;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
 @Data
 public class DetectionResponseDTO {
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Long modelId;
+    private String cameraName;
     private LocalDateTime DetectionDate;
-    private Long DetectionCount;
+    private String DetectionServerPath;
 }

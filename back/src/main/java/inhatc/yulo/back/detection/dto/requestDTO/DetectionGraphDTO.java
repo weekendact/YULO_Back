@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class DetectionDTO {
+public class DetectionGraphDTO {
     private Long userId;
     private String cameraName;
 

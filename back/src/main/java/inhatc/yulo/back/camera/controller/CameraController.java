@@ -1,13 +1,7 @@
 package inhatc.yulo.back.camera.controller;
 
-import inhatc.yulo.back.camera.dto.requestdto.CameraNameRequestDTO;
-import inhatc.yulo.back.camera.dto.requestdto.CameraRankingRequestDTO;
-import inhatc.yulo.back.camera.dto.requestdto.CameraSettingRequestDTO;
-import inhatc.yulo.back.camera.dto.requestdto.CameraTodayDetectionRequestDTO;
-import inhatc.yulo.back.camera.service.CameraNameService;
-import inhatc.yulo.back.camera.service.CameraRankingService;
-import inhatc.yulo.back.camera.service.CameraSettingService;
-import inhatc.yulo.back.camera.service.CameraTodayDetectionService;
+import inhatc.yulo.back.camera.dto.requestdto.*;
+import inhatc.yulo.back.camera.service.*;
 import inhatc.yulo.back.resultdto.ResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +20,8 @@ public class CameraController {
     private CameraRankingService cameraRankingService;
     @Autowired
     private CameraSettingService cameraSettingService;
+    @Autowired
+    private CameraDeleteService cameraDeleteService;
 
     @PostMapping("/todayDetection")
     public ResultDTO<?> cameraTodayDetectionList(@RequestBody CameraTodayDetectionRequestDTO cameraTodayDetectionRequestDTO) {
@@ -46,5 +42,11 @@ public class CameraController {
     @PostMapping("/cameraSetting")
     public ResultDTO<?> cameraSetting(@RequestBody CameraSettingRequestDTO cameraSettingRequestDTO) {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", cameraSettingService.cameraSettingList(cameraSettingRequestDTO), "data");
+    }
+
+    @PostMapping("/cameraDelete")
+    public ResultDTO<?> cameraDelete(@RequestBody CameraDeleteRequestDTO cameraDeleteRequestDTO) {
+        cameraDeleteService.deleteCamera(cameraDeleteRequestDTO);
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data");
     }
 }

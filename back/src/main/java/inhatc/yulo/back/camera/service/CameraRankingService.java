@@ -17,16 +17,16 @@ public class CameraRankingService {
     private DetectionRepository detectionRepository;
 
     public Map<String, Object> findCameraRanking(CameraRankingRequestDTO cameraRankingRequestDTO) {
-         List<Object []> yoloDetectionList = detectionRepository.findCameraDetectionCountsByUserId(cameraRankingRequestDTO.getUserId());
+         List<Object []> DetectionList = detectionRepository.findCameraDetectionCountsByUserId(cameraRankingRequestDTO.getUserId());
          Map<String, Object> resultMap = new HashMap<>();
 
-         if (yoloDetectionList.isEmpty()) {
+         if (DetectionList.isEmpty()) {
              return null;
          }
 
-         for(Object[] yoloDetection : yoloDetectionList) {
-             String cameraName = (String) yoloDetection[0];
-             Long detectionCount = (Long) yoloDetection[1];
+         for(Object[] detection : DetectionList) {
+             String cameraName = (String) detection[0];
+             Long detectionCount = (Long) detection[1];
 
              resultMap.put(cameraName, detectionCount);
          }
