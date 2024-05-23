@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -35,7 +36,7 @@ public class YOLODetection {
     private Model model;
 
     @Column(name = "yolo_detection_date")
-    private Date yoloDetectionDate;
+    private LocalDateTime yoloDetectionDate;
 
     @Column(name = "yolo_detection_count")
     private Long yoloDetectionCount;

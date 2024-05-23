@@ -1,8 +1,8 @@
 package inhatc.yulo.back.yoloDetection.controller;
 
 import inhatc.yulo.back.resultdto.ResultDTO;
-import inhatc.yulo.back.yoloDetection.dto.requestdto.YOLODetectionDTO;
-import inhatc.yulo.back.yoloDetection.dto.responsedto.YOLODetectionResponseDTO;
+import inhatc.yulo.back.yoloDetection.dto.YOLODetectionDTO;
+import inhatc.yulo.back.yoloDetection.dto.YOLODetectionResponseDTO;
 import inhatc.yulo.back.yoloDetection.service.YOLODetectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
