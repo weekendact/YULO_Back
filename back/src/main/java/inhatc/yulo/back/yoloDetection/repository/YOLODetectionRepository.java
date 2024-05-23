@@ -1,6 +1,5 @@
 package inhatc.yulo.back.yoloDetection.repository;
 
-import inhatc.yulo.back.yoloDetection.dto.CameraDetectionCount;
 import inhatc.yulo.back.yoloDetection.entity.YOLODetection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface YOLODetectionRepository extends JpaRepository<YOLODetection, Long> {
@@ -17,9 +17,14 @@ public interface YOLODetectionRepository extends JpaRepository<YOLODetection, Lo
     @Query("SELECT yd FROM YOLODetection yd WHERE yd.user.userId = :userId")
     List<YOLODetection> findAllByUserId(Long userId);
 
-    @Query("SELECT new inhatc.yulo.back.yoloDetection.dto.CameraDetectionCount(yd.camera.cameraId, COUNT(yd)) " +
-            "FROM YOLODetection yd WHERE yd.user.userId = :userId " +
-            "GROUP BY yd.camera.cameraId ORDER BY COUNT(yd) DESC")
-    List<CameraDetectionCount> findCameraDetectionCountsByUserId(Long userId);
-}
+    @Query("SELECT c.cameraName, COUNT(yd.camera.cameraId) AS cnt " +
+            "FROM YOLODetection yd " +
+            "JOIN Camera c ON yd.camera.cameraId = c.cameraId " +
+            "WHERE yd.user.userId = :userId " +
+            "AND FUNCTION('DATE', yd.yoloDetectionDate) = CURRENT_DATE " +
+            "GROUP BY c.cameraName " +
+            "ORDER BY cnt DESC")
+    List<Object[]> findCameraDetectionCountsByUserId(@Param("userId") Long userId);
 
+
+}
