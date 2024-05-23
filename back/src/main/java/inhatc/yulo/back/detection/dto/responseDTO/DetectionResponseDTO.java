@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 public class DetectionResponseDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDateTime yoloDetectionDate;
-    private Long yoloDetectionCount;
+    private LocalDateTime DetectionDate;
+    private Long DetectionCount;
 }

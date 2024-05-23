@@ -21,11 +21,10 @@ public interface DetectionRepository extends JpaRepository<Detection, Long> {
             "FROM Detection d " +
             "JOIN Camera c ON d.camera.cameraId = c.cameraId " +
             "WHERE d.user.userId = :userId " +
-            "AND FUNCTION('DATE', d.yoloDetectionDate) = CURRENT_DATE " +
+            "AND FUNCTION('DATE', d.DetectionDate) = CURRENT_DATE " +
             "GROUP BY c.cameraName " +
             "ORDER BY cnt DESC")
     List<Object[]> findCameraDetectionCountsByUserId(@Param("userId") Long userId);
 
-    List<Detection> findAllByYoloDetectionDateAfter(Date date);
 
 }

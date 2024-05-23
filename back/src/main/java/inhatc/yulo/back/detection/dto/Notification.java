@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Notification {
     private String message;
-    private Long count;
+    private Long userId;
 }

@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "yolo_detection")
+@Table(name = "detection")
 public class Detection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "yolo_detection_id")
+    @Column(name = "detection_id")
     private Long yoloDetectionId;
 
     @ManyToOne
@@ -34,11 +34,11 @@ public class Detection {
     @JoinColumn(name = "model_id", referencedColumnName = "model_id")
     private Model model;
 
-    @Column(name = "yolo_detection_date")
-    private LocalDateTime yoloDetectionDate;
+    @Column(name = "detection_date")
+    private LocalDateTime DetectionDate;
 
-    @Column(name = "yolo_detection_count")
-    private Long yoloDetectionCount;
+    @Column(name = "detection_count")
+    private Long DetectionCount;
 
 
 

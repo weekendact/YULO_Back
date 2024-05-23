@@ -18,21 +18,21 @@ import java.util.List;
 
 
 @Service
-public class YOLODetectionService {
+public class DetectionService {
 
     @Autowired
     private DetectionRepository detectionRepository;
 
     private final Sinks.Many<Notification> sink;
 
-    public YOLODetectionService() {
+    public DetectionService() {
         this.sink = Sinks.many().multicast().onBackpressureBuffer();
     }
 
     @Transactional
     public Detection saveDetection(Detection detection) {
         Detection savedDetection = detectionRepository.save(detection);
-        sink.tryEmitNext(new Notification("새로운 감지 내역!: " + savedDetection.getYoloDetectionDate().toString(), savedDetection.getYoloDetectionCount()));
+        sink.tryEmitNext(new Notification("새로운 감지 내역!: " + savedDetection.getDetectionDate().toString(), savedDetection.getDetectionCount()));
         return savedDetection;
     }
 
@@ -47,8 +47,8 @@ public class YOLODetectionService {
 
         for(Detection detection : detections) {
             DetectionResponseDTO dto = new DetectionResponseDTO();
-            dto.setYoloDetectionDate(detection.getYoloDetectionDate());
-            dto.setYoloDetectionCount(detection.getYoloDetectionCount());
+            dto.setDetectionDate(detection.getDetectionDate());
+            dto.setDetectionCount(detection.getDetectionCount());
             detectionResponseDTOs.add(dto);
         }
 

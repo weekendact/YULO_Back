@@ -39,7 +39,7 @@ public class CameraNameService {
             LocalDate today = LocalDate.now(ZoneId.systemDefault());
 
             for (Detection detection : detections) {
-                if (detection.getYoloDetectionDate().toLocalDate().isEqual(today)) {
+                if (detection.getDetectionDate().toLocalDate().isEqual(today)) {
                     detectionCount++;
                     todayDetectionCount++;
                 }
