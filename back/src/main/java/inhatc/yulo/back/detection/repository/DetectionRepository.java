@@ -28,7 +28,9 @@ public interface DetectionRepository extends JpaRepository<Detection, Long> {
     @Query("SELECT c.cameraName, d.model.modelId, d.DetectionDate, d.detectionServerPath " +
             "FROM Detection d " +
             "JOIN Camera c ON d.camera.cameraId = c.cameraId " +
-            "WHERE d.user.userId = :userId")
+            "WHERE d.user.userId = :userId " +
+            "ORDER BY d.DetectionDate DESC"
+            )
     List<Object[]> findDetectionByUserId(Long userId);
 
 
