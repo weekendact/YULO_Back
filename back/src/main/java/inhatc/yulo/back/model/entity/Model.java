@@ -26,8 +26,4 @@ public class Model {
     @Column(name = "model_all_user")
     private Long modelAllUser;
 
-    @ManyToOne
-    @JoinColumn(name = "camera_id", referencedColumnName = "camera_id")
-    private Camera camera;
-
 }

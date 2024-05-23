@@ -1,10 +1,8 @@
 package inhatc.yulo.back.camera.service;
 
 import inhatc.yulo.back.camera.dto.requestdto.CameraRankingRequestDTO;
-import inhatc.yulo.back.camera.entity.Camera;
 import inhatc.yulo.back.camera.repository.CameraRepository;
-import inhatc.yulo.back.yoloDetection.entity.YOLODetection;
-import inhatc.yulo.back.yoloDetection.repository.YOLODetectionRepository;
+import inhatc.yulo.back.detection.repository.DetectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +14,10 @@ public class CameraRankingService {
     private CameraRepository cameraRepository;
 
     @Autowired
-    private YOLODetectionRepository yoloDetectionRepository;
+    private DetectionRepository detectionRepository;
 
     public Map<String, Object> findCameraRanking(CameraRankingRequestDTO cameraRankingRequestDTO) {
-         List<Object []> yoloDetectionList = yoloDetectionRepository.findCameraDetectionCountsByUserId(cameraRankingRequestDTO.getUserId());
+         List<Object []> yoloDetectionList = detectionRepository.findCameraDetectionCountsByUserId(cameraRankingRequestDTO.getUserId());
          Map<String, Object> resultMap = new HashMap<>();
 
          if (yoloDetectionList.isEmpty()) {

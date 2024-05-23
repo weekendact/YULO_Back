@@ -1,4 +1,4 @@
-package inhatc.yulo.back.yoloDetection.dto;
+package inhatc.yulo.back.detection.dto.responseDTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Data
-public class YOLODetectionResponseDTO {
+public class DetectionResponseDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDateTime yoloDetectionDate;

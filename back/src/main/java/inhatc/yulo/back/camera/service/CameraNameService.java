@@ -1,12 +1,10 @@
 package inhatc.yulo.back.camera.service;
 
 import inhatc.yulo.back.camera.dto.requestdto.CameraNameRequestDTO;
-import inhatc.yulo.back.camera.dto.responsedto.CameraNameResponseDTO;
-import inhatc.yulo.back.camera.dto.responsedto.CameraTodayDetectionResponseDTO;
 import inhatc.yulo.back.camera.entity.Camera;
 import inhatc.yulo.back.camera.repository.CameraRepository;
-import inhatc.yulo.back.yoloDetection.entity.YOLODetection;
-import inhatc.yulo.back.yoloDetection.repository.YOLODetectionRepository;
+import inhatc.yulo.back.detection.entity.Detection;
+import inhatc.yulo.back.detection.repository.DetectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +21,7 @@ public class CameraNameService {
     private CameraRepository cameraRepository;
 
     @Autowired
-    private YOLODetectionRepository yoloDetectionRepository;
+    private DetectionRepository detectionRepository;
 
     public Map<String, Integer> findCameraName(CameraNameRequestDTO cameraNameRequestDTO) {
         Map<String, Integer> resultMap = new HashMap<>();
@@ -32,7 +30,7 @@ public class CameraNameService {
 
         int todayDetectionCount = 0;
         for (Camera camera : cameraList) {
-            List<YOLODetection> yoloDetections = yoloDetectionRepository.findDetectionsByUserIdAndCameraName(
+            List<Detection> detections = detectionRepository.findDetectionsByUserIdAndCameraName(
                     cameraNameRequestDTO.getUserId(), camera.getCameraName());
 
             String cameraName = camera.getCameraName();
@@ -40,7 +38,7 @@ public class CameraNameService {
 
             LocalDate today = LocalDate.now(ZoneId.systemDefault());
 
-            for (YOLODetection detection : yoloDetections) {
+            for (Detection detection : detections) {
                 if (detection.getYoloDetectionDate().toLocalDate().isEqual(today)) {
                     detectionCount++;
                     todayDetectionCount++;
