@@ -17,7 +17,7 @@ public class DetectionListGetService {
     private DetectionRepository detectionRepository;
 
     public List<DetectionResponseDTO> getDetectionList(DetectionRequestDTO detectionRequestDTO){
-        List<Object[]> getDetectionList =  detectionRepository.findDetectionByUserId(detectionRequestDTO.getUserId());
+        List<Object[]> getDetectionList =  detectionRepository.findDetectionsByUserId(detectionRequestDTO.getUserId());
         List<DetectionResponseDTO> detectionResponseDTOList = new ArrayList<>();
 
         for (Object[] objects : getDetectionList) {
@@ -27,6 +27,8 @@ public class DetectionListGetService {
             detectionResponseDTO.setModelId((Long) objects[1]);
             detectionResponseDTO.setDetectionDate((LocalDateTime) objects[2]);
             detectionResponseDTO.setDetectionServerPath(objects[3].toString());
+            detectionResponseDTO.setDetectionChecked((boolean) objects[4]);
+            detectionResponseDTO.setDetectionId((Long) objects[5]);
 
             detectionResponseDTOList.add(detectionResponseDTO);
         }

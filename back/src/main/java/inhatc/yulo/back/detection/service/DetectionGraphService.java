@@ -1,7 +1,7 @@
 package inhatc.yulo.back.detection.service;
 
 
-import inhatc.yulo.back.detection.dto.requestDTO.DetectionGraphDTO;
+import inhatc.yulo.back.detection.dto.requestDTO.DetectionGraphRequestDTO;
 import inhatc.yulo.back.detection.dto.responseDTO.DetectionGraphResponseDTO;
 import inhatc.yulo.back.detection.entity.Detection;
 import inhatc.yulo.back.detection.repository.DetectionRepository;
@@ -20,8 +20,8 @@ public class DetectionGraphService {
     private DetectionRepository detectionRepository;
 
 
-    public List<DetectionGraphResponseDTO> getDetection(DetectionGraphDTO detectionGraphDTO) {
-        List<Detection> detections = detectionRepository.findDetectionsByUserIdAndCameraName(detectionGraphDTO.getUserId(), detectionGraphDTO.getCameraName());
+    public List<DetectionGraphResponseDTO> getDetection(DetectionGraphRequestDTO detectionGraphRequestDTO) {
+        List<Detection> detections = detectionRepository.findDetectionsByUserIdAndCameraName(detectionGraphRequestDTO.getUserId(), detectionGraphRequestDTO.getCameraName());
         List<DetectionGraphResponseDTO> detectionGraphResponseDTOS = new ArrayList<>();
 
 

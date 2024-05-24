@@ -1,9 +1,14 @@
 package inhatc.yulo.back.detection.controller;
 
+import inhatc.yulo.back.resultdto.ResultDTO;
+
+import inhatc.yulo.back.detection.dto.requestDTO.DetectionCheckedRequestDTO;
+import inhatc.yulo.back.detection.service.DetectionCheckedService;
+
 import inhatc.yulo.back.detection.dto.requestDTO.DetectionRequestDTO;
 import inhatc.yulo.back.detection.service.DetectionListGetService;
-import inhatc.yulo.back.resultdto.ResultDTO;
-import inhatc.yulo.back.detection.dto.requestDTO.DetectionGraphDTO;
+
+import inhatc.yulo.back.detection.dto.requestDTO.DetectionGraphRequestDTO;
 import inhatc.yulo.back.detection.dto.responseDTO.DetectionGraphResponseDTO;
 import inhatc.yulo.back.detection.service.DetectionGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +26,13 @@ public class DetectionController {
     private DetectionGraphService detectionGraphService;
     @Autowired
     private DetectionListGetService detectionListGetService;
+    @Autowired
+    private DetectionCheckedService detectionCheckedService;
 
 
     @PostMapping("/getDetection")
-    public ResultDTO<?> getDetection(@RequestBody DetectionGraphDTO detectionGraphDTO) {
-        List<DetectionGraphResponseDTO> detections = detectionGraphService.getDetection(detectionGraphDTO);
+    public ResultDTO<?> getDetection(@RequestBody DetectionGraphRequestDTO detectionGraphRequestDTO) {
+        List<DetectionGraphResponseDTO> detections = detectionGraphService.getDetection(detectionGraphRequestDTO);
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detections, "data");
     }
 
@@ -34,6 +41,11 @@ public class DetectionController {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detectionListGetService.getDetectionList(detectionRequestDTO), "data");
     }
 
+    @PostMapping("/detectionCheck")
+    public ResultDTO<?> detectionCheck(@RequestBody DetectionCheckedRequestDTO detectionCheckedRequestDTO) {
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detectionCheckedService.isDetectionChecked(detectionCheckedRequestDTO), "data");
+    }
+
     @PostMapping("/test-saveDetection")
-    public ResultDTO<?> testSaveDetection(@RequestBody DetectionGraphDTO detectionGraphDTO) {return null;}
+    public ResultDTO<?> testSaveDetection(@RequestBody DetectionGraphRequestDTO detectionGraphRequestDTO) {return null;}
 }

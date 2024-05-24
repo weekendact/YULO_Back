@@ -9,5 +9,7 @@ public class DetectionResponseDTO {
     private Long modelId;
     private String cameraName;
     private LocalDateTime DetectionDate;
-    private String DetectionServerPath;
+    private String detectionServerPath;
+    private boolean detectionChecked;
+    private Long detectionId;
 }

@@ -21,7 +21,8 @@ public class CameraRankingService {
          Map<String, Object> resultMap = new HashMap<>();
 
          if (DetectionList.isEmpty()) {
-             return null;
+             resultMap.put("", 0);
+             return resultMap;
          }
 
          for(Object[] detection : DetectionList) {

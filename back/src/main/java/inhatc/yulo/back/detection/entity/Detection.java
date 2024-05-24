@@ -40,4 +40,6 @@ public class Detection {
     @Column(name = "detection_server_path")
     private String detectionServerPath;
 
+    @Column(name = "detection_checked")
+    private boolean detectionChecked;
 }
