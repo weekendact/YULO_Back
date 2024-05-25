@@ -1,47 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ecc0c60-90ed-429a-be21-6dfc2abfc77e" name="Changes" comment="" />
+    <list default="true" id="d8cc3d9e-b4c8-4b27-b70b-3f488a51101a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="back" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2gmKkOUDE2DATFG4ZgDnd1aGOsC" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
-  <component name="ProjectId" id="2gqgkpzkylh65IIulOWtbvJVflR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "Gradle.Build back.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.BackApplication.executor": "Run",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/82106/OneDrive/문서/GitHub/YULO_Back/back",
+    "last_opened_file_path": "C:/Project/HanJanHae_Back",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="inhatc.yulo.back.detection.service" />
+      <recent name="inhatc.yulo.back.yoloDetection.dto" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\YULO_Back\back\src\main\java\inhatc\yulo\back\model" />
+      <recent name="C:\Project\YULO_Back\back\src\main\java\inhatc\yulo\back\yoloDetection" />
+      <recent name="C:\Project\YULO_Back\back\src\main\java\inhatc\yulo\back\cameraURL" />
+      <recent name="C:\Project\YULO_Back\back\src\main\java\inhatc\yulo\back\dashboard" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="inhatc.yulo.back.user.service" />
+      <recent name="inhatc.yulo.back.user.controller" />
+      <recent name="inhatc.yulo.back.user.dto.requestdto" />
+      <recent name="inhatc.yulo.back.user.dto.responsedto" />
+      <recent name="inhatc.yulo.back.user.repository" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="BackApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="back.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="inhatc.yulo.back.BackApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7ecc0c60-90ed-429a-be21-6dfc2abfc77e" name="Changes" comment="" />
-      <created>1716430669759</created>
+      <changelist id="d8cc3d9e-b4c8-4b27-b70b-3f488a51101a" name="Changes" comment="" />
+      <created>1716297455453</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1716430669759</updated>
-      <workItem from="1716430673147" duration="63000" />
+      <updated>1716297455453</updated>
+      <workItem from="1716297456443" duration="13306000" />
+      <workItem from="1716369921383" duration="3812000" />
+      <workItem from="1716374408532" duration="11652000" />
+      <workItem from="1716447597929" duration="19229000" />
+      <workItem from="1716527418924" duration="3741000" />
+      <workItem from="1716562304200" duration="2106000" />
+      <workItem from="1716619574284" duration="1632000" />
     </task>
     <servers />
   </component>
