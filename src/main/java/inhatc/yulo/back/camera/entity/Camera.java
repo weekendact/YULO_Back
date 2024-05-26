@@ -39,4 +39,10 @@ public class Camera {
     @ManyToOne
     @JoinColumn(name = "model_id", referencedColumnName = "model_id")
     private Model model;
+
+    @Column(name = "label")
+    private Integer label;
+
+    @Column(name = "count")
+    private Integer count;
 }

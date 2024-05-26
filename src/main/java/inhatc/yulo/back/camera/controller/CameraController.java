@@ -20,6 +20,8 @@ public class CameraController {
     private CameraSettingService cameraSettingService;
     @Autowired
     private CameraDeleteService cameraDeleteService;
+    @Autowired
+    private CameraAddService cameraAddService;
 
     @PostMapping("/cameraName")
     public ResultDTO<?> cameraNameList(@RequestBody CameraNameRequestDTO cameraNameRequestDTO) {
@@ -39,6 +41,12 @@ public class CameraController {
     @DeleteMapping("/cameraDelete")
     public ResultDTO<?> cameraDelete(@RequestBody CameraDeleteRequestDTO cameraDeleteRequestDTO) {
         cameraDeleteService.deleteCamera(cameraDeleteRequestDTO);
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data");
+    }
+
+    @PostMapping("/cameraAdd")
+    public ResultDTO<?> camerAdd(@RequestBody CameraAddRequestDTO cameraAddRequestDTO) {
+        cameraAddService.addCamera(cameraAddRequestDTO);
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data");
     }
 }
