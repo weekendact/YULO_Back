@@ -2,6 +2,7 @@ package inhatc.yulo.back.user.service;
 
 import inhatc.yulo.back.user.dto.requestdto.UserLoginDTO;
 import inhatc.yulo.back.user.dto.requestdto.UserTokenLoginDTO;
+import inhatc.yulo.back.user.dto.responsedto.UserLoginOkDTO;
 import inhatc.yulo.back.user.entity.User;
 import inhatc.yulo.back.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,15 @@ public class UserSigninService {
     @Autowired
     private UserRepository userRepository;
 
-    public Long findUser(UserLoginDTO userLoginDTO) {
+    public UserLoginOkDTO findUser(UserLoginDTO userLoginDTO) {
         Optional<User> optionalUser = userRepository.findByUserEmail(userLoginDTO.getUserEmail());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             if(user.getUserPw().equals(userLoginDTO.getUserPw())) {
-                return user.getUserId();
+                UserLoginOkDTO userLoginOkDTO = new UserLoginOkDTO();
+                userLoginOkDTO.setUserEmail(user.getUserEmail());
+                userLoginOkDTO.setUserId(user.getUserId());
+                return userLoginOkDTO;
             }
         }
         return null;

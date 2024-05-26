@@ -4,6 +4,7 @@ import inhatc.yulo.back.resultdto.ResultDTO;
 import inhatc.yulo.back.user.dto.requestdto.UserLoginDTO;
 import inhatc.yulo.back.user.dto.requestdto.UserRegisterDTO;
 import inhatc.yulo.back.user.dto.requestdto.UserTokenLoginDTO;
+import inhatc.yulo.back.user.dto.responsedto.UserLoginOkDTO;
 import inhatc.yulo.back.user.service.UserSigninService;
 import inhatc.yulo.back.user.service.UserSignupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class UserController {
 
     @PostMapping("/signin")
     public ResultDTO<?> userSave(@RequestBody UserLoginDTO userLoginDTO) {
-        return new ResultDTO<>().makeResult(HttpStatus.OK, "data", userSigninService.findUser(userLoginDTO), "userId");
+        UserLoginOkDTO userLoginOkDTO = userSigninService.findUser(userLoginDTO);
+        if (userLoginOkDTO != null) {
+            return new ResultDTO<>().makeResult(HttpStatus.OK, "data", userLoginOkDTO,"data");
+        } else {
+            return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Invalid credentials");
+        }
     }
 }
