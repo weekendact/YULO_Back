@@ -22,6 +22,11 @@ public interface CameraRepository extends JpaRepository<Camera, Long> {
     Optional<Camera> findByUserIdAndCameraName(Long userId, String cameraName);
     Optional<Camera> findByCameraId(Long cameraId);
 
+    @Query("SELECT c.cameraName " +
+            "FROM Camera c " +
+            "WHERE c.user.userId = :userId")
+    List<String> findCameraNamesByUserId(Long userId);
+
     @Transactional
     @Modifying
     @Query("DELETE FROM Camera c WHERE c.cameraName = :cameraName AND c.user.userId = :userId")

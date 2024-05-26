@@ -24,6 +24,7 @@ public class CameraSettingService {
             CameraSettingResponseDTO cameraSettingResponseDTO = new CameraSettingResponseDTO();
             cameraSettingResponseDTO.setCameraName(camera.getCameraName());
             cameraSettingResponseDTO.setCameraURL(camera.getCameraURL());
+            cameraSettingResponseDTO.setCameraId(camera.getCameraId());
             cameraSettingResponseDTO.setGraphURL(camera.getGraphURL());
             cameraSettingResponseDTO.setStreamURL(camera.getStreamURL());
             cameraSettingResponseDTO.setModelId(camera.getModel().getModelId());

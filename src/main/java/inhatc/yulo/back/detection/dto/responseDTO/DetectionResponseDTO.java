@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class DetectionResponseDTO {
     private Long modelId;
     private String cameraName;
-    private LocalDateTime DetectionDate;
+    private LocalDateTime detectionDate;
     private String detectionServerPath;
     private Boolean detectionChecked;
     private Long detectionId;
