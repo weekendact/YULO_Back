@@ -26,7 +26,8 @@ public class DetectionController {
     private TodayDetectionService todayDetectionService;
     @Autowired
     private DetectionsDetailsService detectionsDetailsService;
-
+    @Autowired
+    private DetectionListDeleteService detectionListDeleteService;
 
     @PostMapping("/getDetection")
     public ResultDTO<?> getDetection(@RequestBody DetectionGraphRequestDTO detectionGraphRequestDTO) {
@@ -57,4 +58,12 @@ public class DetectionController {
 
     @PostMapping("/test-saveDetection")
     public ResultDTO<?> testSaveDetection(@RequestBody DetectionGraphRequestDTO detectionGraphRequestDTO) {return null;}
+
+    @PostMapping("/detectionListDelete")
+    public ResultDTO<?> detectionListDelete(@RequestBody DetectionDeleteRequestDTO detectionDeleteRequestDTO) {
+        boolean isDeleted = detectionListDeleteService.deleteDetectionList(detectionDeleteRequestDTO.getDetectionId());
+        return isDeleted ?
+                new ResultDTO<>().makeResult(HttpStatus.OK, "data") :
+                new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "data");
+    }
 }
