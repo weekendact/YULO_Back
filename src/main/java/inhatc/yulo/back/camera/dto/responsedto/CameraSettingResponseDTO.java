@@ -11,4 +11,5 @@ public class CameraSettingResponseDTO {
     private String cameraURL;
     private String streamURL;
     private Long modelId;
+    private Long cameraId;
 }
