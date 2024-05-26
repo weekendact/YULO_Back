@@ -59,7 +59,7 @@ public class DetectionController {
     @PostMapping("/test-saveDetection")
     public ResultDTO<?> testSaveDetection(@RequestBody DetectionGraphRequestDTO detectionGraphRequestDTO) {return null;}
 
-    @PostMapping("/detectionListDelete")
+    @DeleteMapping("/detectionListDelete/{detectionId}")
     public ResultDTO<?> detectionListDelete(@RequestBody DetectionDeleteRequestDTO detectionDeleteRequestDTO) {
         boolean isDeleted = detectionListDeleteService.deleteDetectionList(detectionDeleteRequestDTO.getDetectionId());
         return isDeleted ?
