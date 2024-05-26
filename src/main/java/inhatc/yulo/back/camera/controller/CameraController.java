@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class CameraController {
 
     @Autowired
-    private CameraTodayDetectionService cameraTodayDetectionService;
-    @Autowired
     private CameraNameService cameraNameService;
     @Autowired
     private CameraRankingService cameraRankingService;
@@ -22,12 +20,6 @@ public class CameraController {
     private CameraSettingService cameraSettingService;
     @Autowired
     private CameraDeleteService cameraDeleteService;
-
-    @PostMapping("/todayDetection")
-    public ResultDTO<?> cameraTodayDetectionList(@RequestBody CameraTodayDetectionRequestDTO cameraTodayDetectionRequestDTO) {
-        return new ResultDTO<>().makeResult(HttpStatus.OK, "data",
-                cameraTodayDetectionService.findCameraTodayDetection(cameraTodayDetectionRequestDTO), "data");
-    }
 
     @PostMapping("/cameraName")
     public ResultDTO<?> cameraNameList(@RequestBody CameraNameRequestDTO cameraNameRequestDTO) {

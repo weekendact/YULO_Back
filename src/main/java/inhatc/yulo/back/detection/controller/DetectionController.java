@@ -1,16 +1,10 @@
 package inhatc.yulo.back.detection.controller;
 
+import inhatc.yulo.back.detection.dto.requestDTO.*;
+import inhatc.yulo.back.detection.service.*;
 import inhatc.yulo.back.resultdto.ResultDTO;
 
-import inhatc.yulo.back.detection.dto.requestDTO.DetectionCheckedRequestDTO;
-import inhatc.yulo.back.detection.service.DetectionCheckedService;
-
-import inhatc.yulo.back.detection.dto.requestDTO.DetectionRequestDTO;
-import inhatc.yulo.back.detection.service.DetectionListGetService;
-
-import inhatc.yulo.back.detection.dto.requestDTO.DetectionGraphRequestDTO;
 import inhatc.yulo.back.detection.dto.responseDTO.DetectionGraphResponseDTO;
-import inhatc.yulo.back.detection.service.DetectionGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +22,10 @@ public class DetectionController {
     private DetectionListGetService detectionListGetService;
     @Autowired
     private DetectionCheckedService detectionCheckedService;
+    @Autowired
+    private TodayDetectionService todayDetectionService;
+    @Autowired
+    private DetectionsDetailsService detectionsDetailsService;
 
 
     @PostMapping("/getDetection")
@@ -44,6 +42,17 @@ public class DetectionController {
     @PostMapping("/detectionCheck")
     public ResultDTO<?> detectionCheck(@RequestBody DetectionCheckedRequestDTO detectionCheckedRequestDTO) {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detectionCheckedService.isDetectionChecked(detectionCheckedRequestDTO), "data");
+    }
+
+    @PostMapping("/todayDetection")
+    public ResultDTO<?> todayDetectionList(@RequestBody TodayDetectionRequestDTO todayDetectionRequestDTO) {
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data",
+                todayDetectionService.findCameraTodayDetection(todayDetectionRequestDTO), "data");
+    }
+
+    @PostMapping("/detectionsDetails")
+    public ResultDTO<?> detectionsDetailsList(@RequestBody DetectionsDetailsRequestDTO detectionsDetailsRequestDTO) {
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detectionsDetailsService.findDetectionDetails(detectionsDetailsRequestDTO), "data");
     }
 
     @PostMapping("/test-saveDetection")

@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8cc3d9e-b4c8-4b27-b70b-3f488a51101a" name="Changes" comment="" />
+    <list default="true" id="d8cc3d9e-b4c8-4b27-b70b-3f488a51101a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/dto/requestDTO/DetectionsDetailsRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/dto/responseDTO/DetectionsDetailsResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/service/DetectionsDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/controller/CameraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/controller/CameraController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/dto/requestdto/CameraTodayDetectionRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/dto/requestDTO/TodayDetectionRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/dto/responsedto/CameraTodayDetectionResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/dto/responseDTO/TodayDetectionResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/service/CameraTodayDetectionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/service/TodayDetectionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/controller/DetectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/controller/DetectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/dto/responseDTO/DetectionResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/dto/responseDTO/DetectionResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/entity/Detection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/entity/Detection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/repository/DetectionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/repository/DetectionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/service/DetectionListGetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/detection/service/DetectionListGetService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,13 +57,13 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2gmKkOUDE2DATFG4ZgDnd1aGOsC" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -57,6 +72,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.Build YULO_Back.executor": "Run",
     "Gradle.Build back.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -66,8 +82,9 @@
     "Spring Boot.BackApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Project/HanJanHae_Back",
+    "last_opened_file_path": "C:/Project/YULO_Web",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -76,6 +93,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -130,10 +148,16 @@
       <workItem from="1716527418924" duration="3741000" />
       <workItem from="1716562304200" duration="2106000" />
       <workItem from="1716619574284" duration="1632000" />
+      <workItem from="1716622045530" duration="5358000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
   </component>
 </project>

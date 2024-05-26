@@ -4,12 +4,12 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+
 @Data
-public class DetectionResponseDTO {
-    private Long modelId;
+public class DetectionsDetailsResponseDTO {
     private String cameraName;
-    private LocalDateTime DetectionDate;
+    private LocalDateTime detectedDate;
+    private Long modelId;
     private String detectionServerPath;
     private Boolean detectionChecked;
-    private Long detectionId;
 }

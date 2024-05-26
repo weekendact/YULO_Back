@@ -27,7 +27,7 @@ public class DetectionListGetService {
             detectionResponseDTO.setModelId((Long) objects[1]);
             detectionResponseDTO.setDetectionDate((LocalDateTime) objects[2]);
             detectionResponseDTO.setDetectionServerPath(objects[3].toString());
-            detectionResponseDTO.setDetectionChecked((boolean) objects[4]);
+            detectionResponseDTO.setDetectionChecked((Boolean) objects[4]);
             detectionResponseDTO.setDetectionId((Long) objects[5]);
 
             detectionResponseDTOList.add(detectionResponseDTO);

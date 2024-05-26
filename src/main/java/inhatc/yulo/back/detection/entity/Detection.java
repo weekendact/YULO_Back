@@ -35,11 +35,11 @@ public class Detection {
     private Model model;
 
     @Column(name = "detection_date")
-    private LocalDateTime DetectionDate;
+    private LocalDateTime detectionDate;
 
     @Column(name = "detection_server_path")
     private String detectionServerPath;
 
     @Column(name = "detection_checked")
-    private boolean detectionChecked;
+    private Boolean detectionChecked;
 }
