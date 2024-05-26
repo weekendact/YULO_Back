@@ -46,7 +46,8 @@ public class CameraController {
 
     @PostMapping("/cameraAdd")
     public ResultDTO<?> camerAdd(@RequestBody CameraAddRequestDTO cameraAddRequestDTO) {
-        cameraAddService.addCamera(cameraAddRequestDTO);
-        return new ResultDTO<>().makeResult(HttpStatus.OK, "data");
+        return cameraAddService.addCamera(cameraAddRequestDTO)?
+                new ResultDTO<>().makeResult(HttpStatus.OK, "data"):
+                new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "이미 설정된 카메라 이름입니다.");
     }
 }

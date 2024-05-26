@@ -21,21 +21,29 @@ public class CameraAddService {
     @Autowired
     private ModelRepository modelRepository;
 
-    public void addCamera(CameraAddRequestDTO cameraAddRequestDTO) {
-        Camera camera = new Camera();
+    public boolean addCamera(CameraAddRequestDTO cameraAddRequestDTO) {
+        if (cameraRepository.findByUserIdAndCameraName(cameraAddRequestDTO.getUserId(), cameraAddRequestDTO.getCameraName()).isEmpty()){
+            Camera camera = new Camera();
 
-        User user = userRepository.findById(cameraAddRequestDTO.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + cameraAddRequestDTO.getUserId()));
-        camera.setUser(user);
+            User user = userRepository.findById(cameraAddRequestDTO.getUserId())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + cameraAddRequestDTO.getUserId()));
+            camera.setUser(user);
 
-        camera.setCameraName(cameraAddRequestDTO.getCameraName());
-        camera.setLabel(cameraAddRequestDTO.getLabel());
-        camera.setCount(cameraAddRequestDTO.getCount());
-        Model model = modelRepository.findById(cameraAddRequestDTO.getModelId())
-                        .orElseThrow(() -> new EntityNotFoundException("Model not found with id : " + cameraAddRequestDTO.getModelId()));
-        camera.setModel(model);
-        camera.setCameraURL(cameraAddRequestDTO.getCameraURL());
+            camera.setCameraName(cameraAddRequestDTO.getCameraName());
+            camera.setLabel(cameraAddRequestDTO.getLabel());
+            camera.setCount(cameraAddRequestDTO.getCount());
+            Model model = modelRepository.findById(cameraAddRequestDTO.getModelId())
+                            .orElseThrow(() -> new EntityNotFoundException("Model not found with id : " + cameraAddRequestDTO.getModelId()));
+            camera.setModel(model);
+            camera.setCameraURL(cameraAddRequestDTO.getCameraURL());
+            camera.setStreamURL(cameraAddRequestDTO.getStreamURL());
+            camera.setGraphURL(cameraAddRequestDTO.getGraphURL());
 
-        cameraRepository.save(camera);
+            cameraRepository.save(camera);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

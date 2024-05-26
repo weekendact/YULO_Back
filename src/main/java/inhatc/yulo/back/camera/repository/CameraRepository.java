@@ -15,8 +15,11 @@ import java.util.Optional;
 @Repository
 public interface CameraRepository extends JpaRepository<Camera, Long> {
     @Query("SELECT c FROM Camera c WHERE c.user.userId = :userId")
-    List<Camera> findByUserId(@Param("userId") Long userId);
+    List<Camera> findByUserId(Long userId);
 
+    @Query("SELECT c FROM Camera c WHERE c.user.userId = :userId " +
+            "AND c.cameraName = :cameraName")
+    Optional<Camera> findByUserIdAndCameraName(Long userId, String cameraName);
     Optional<Camera> findByCameraId(Long cameraId);
 
     @Transactional

@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8cc3d9e-b4c8-4b27-b70b-3f488a51101a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/dto/requestdto/CameraAddRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/service/CameraAddService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/graph/controller/GraphController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/graph/entity/Graph.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/graph/repository/GraphRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/controller/CameraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/controller/CameraController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/entity/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/entity/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/model/repository/ModelRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/model/repository/ModelRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/dto/requestdto/CameraAddRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/dto/requestdto/CameraAddRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/repository/CameraRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/repository/CameraRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/service/CameraAddService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inhatc/yulo/back/camera/service/CameraAddService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +156,7 @@
       <workItem from="1716622045530" duration="5358000" />
       <workItem from="1716711712801" duration="1224000" />
       <workItem from="1716712991829" duration="1699000" />
-      <workItem from="1716714939874" duration="2808000" />
+      <workItem from="1716714939874" duration="3209000" />
     </task>
     <servers />
   </component>
