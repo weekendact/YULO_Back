@@ -22,6 +22,8 @@ public class CameraController {
     private CameraDeleteService cameraDeleteService;
     @Autowired
     private CameraAddService cameraAddService;
+    @Autowired
+    private CameraUpdateService cameraUpdateService;
 
     @PostMapping("/cameraName")
     public ResultDTO<?> cameraNameList(@RequestBody CameraNameRequestDTO cameraNameRequestDTO) {
@@ -49,5 +51,12 @@ public class CameraController {
         return cameraAddService.addCamera(cameraAddRequestDTO)?
                 new ResultDTO<>().makeResult(HttpStatus.OK, "data"):
                 new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "이미 설정된 카메라 이름입니다.");
+    }
+
+    @PutMapping("/cameraUpdate")
+    public ResultDTO<?> cameraUpdate(@RequestBody CameraUpdateRequestDTO cameraUpdateRequestDTO) {
+        return cameraUpdateService.updateCamera(cameraUpdateRequestDTO)?
+                new ResultDTO<>().makeResult(HttpStatus.OK, "data") :
+                new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "카메라 수정 실패");
     }
 }
