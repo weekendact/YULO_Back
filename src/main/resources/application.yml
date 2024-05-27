@@ -1,0 +1,14 @@
+spring:
+  config:
+    import: "optional:classpath:application-db.yml"
+
+  application:
+    name: back
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8080
