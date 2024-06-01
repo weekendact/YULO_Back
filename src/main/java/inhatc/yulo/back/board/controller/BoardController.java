@@ -6,10 +6,13 @@ import inhatc.yulo.back.board.entity.Board;
 import inhatc.yulo.back.board.service.*;
 import inhatc.yulo.back.resultdto.ResultDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("board")
@@ -46,9 +49,19 @@ public class BoardController {
 
     // 전체 리스트 보기
     @GetMapping("/list")
-    public ResultDTO<?> getBoardList() {
-        List<BoardListResponseDTO> boardList = boardListService.getBoardList();
-        return new ResultDTO<>().makeResult(HttpStatus.OK, "Board list successfully", boardList, "data");
+    public ResultDTO<?> getBoardList(@RequestParam(defaultValue = "1") int page) {
+        Page<BoardListResponseDTO> boardPage = boardListService.getBoardList(page);
+
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("content", boardPage.getContent());
+//        responseData.put("totalElements", boardPage.getTotalElements()); // 전체 요소 수
+//        responseData.put("totalPages", boardPage.getTotalPages()); // 전체 페이지 수
+//        responseData.put("number", boardPage.getNumber()); // 현재 페이지 번호
+//        responseData.put("size", boardPage.getSize()); // 페이지당 요소 수
+//        responseData.put("first", boardPage.isFirst()); // 첫 번째 페이지인지 여부
+//        responseData.put("last", boardPage.isLast()); // 마지막 페이지인지 여부
+
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "Board list retrieved successfully", responseData, "data");
     }
 
     // 제목으로 검색해서 리스트 보기

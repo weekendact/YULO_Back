@@ -4,6 +4,10 @@ import inhatc.yulo.back.board.dto.responsedto.BoardListResponseDTO;
 import inhatc.yulo.back.board.entity.Board;
 import inhatc.yulo.back.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +21,14 @@ public class BoardListService {
 
     private final BoardRepository boardRepository;
 
-    public List<BoardListResponseDTO> getBoardList() {
-        List<Board> boardList = boardRepository.findAll();
+    public Page<BoardListResponseDTO> getBoardList(int page) {
+        int pageSize = 10;
+        Pageable pageable = PageRequest.of(page - 1, pageSize); // 페이지 번호는 0부터 시작
+
+        Page<Board> boardPage = boardRepository.findAll(pageable);
         List<BoardListResponseDTO> responseDTOList = new ArrayList<>();
 
-        for(Board board : boardList) {
+        for (Board board : boardPage.getContent()) {
             BoardListResponseDTO responseDTO = BoardListResponseDTO.builder()
                     .boardId(board.getId())
                     .title(board.getTitle())
@@ -30,6 +37,6 @@ public class BoardListService {
             responseDTOList.add(responseDTO);
         }
 
-        return responseDTOList;
+        return new PageImpl<>(responseDTOList, pageable, boardPage.getTotalElements());
     }
 }
