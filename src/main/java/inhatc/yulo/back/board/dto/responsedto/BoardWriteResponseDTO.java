@@ -23,7 +23,7 @@ public class BoardWriteResponseDTO {
     private String content;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDateTime createDate;
+    private LocalDateTime createDate; // 작성일
 
 
 }

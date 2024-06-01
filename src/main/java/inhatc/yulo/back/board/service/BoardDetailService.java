@@ -23,6 +23,7 @@ public class BoardDetailService {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new IllegalArgumentException("Board not found"));
 
+        // 게시판에 있는 댓글
         List<Comment> commentEntities = commentRepository.findByBoard_Id(boardId);
         List<CommentResponseDTO> comments = new ArrayList<>();
 

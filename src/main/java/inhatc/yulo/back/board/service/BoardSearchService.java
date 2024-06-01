@@ -18,10 +18,11 @@ public class BoardSearchService {
     public List<BoardListResponseDTO> searchBoard(String title, String userName) {
         List<Board> boardList;
 
-        // 검색 사용
+        // 검색
+        // 제목을 검색한 경우
         if(title != null) {
             boardList = boardRepository.findByTitleContaining(title);
-        } else if(userName != null) {
+        } else if(userName != null) { // 이름으로 검색한 경우
             boardList = boardRepository.findByUser_UserNameContaining(userName);
         } else {
             boardList = boardRepository.findAll();

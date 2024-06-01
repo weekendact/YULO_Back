@@ -11,6 +11,9 @@ import lombok.*;
 public class BoardListResponseDTO {
 
     private Long boardId; // 게시글 번호
+
     private String title; // 제목
+
     private String userName; // 작성자 이름
+
 }
