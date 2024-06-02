@@ -30,6 +30,7 @@ public class BoardController {
     private final CommentService commentService;
     private final NoticeWriteService noticeWriteService;
     private final NoticeUpdateService noticeUpdateService;
+    private final NoticeDeleteService noticeDeleteService;
 
     // 게시글 쓰기
     @PostMapping("/write")
@@ -180,6 +181,21 @@ public class BoardController {
             }
         } else {
             return new ResultDTO<>().makeResult(HttpStatus.FORBIDDEN, "Only administrators can update notices.", null, "error");
+        }
+    }
+
+    // 공지사항 게시글 삭제
+    @PostMapping("/deleteNotice")
+    public ResultDTO<?> deleteNotice(@RequestBody NoticeDeleteRequestDTO noticeDeleteRequestDTO) {
+        if (noticeDeleteRequestDTO.getUserId() == 2L) {
+            boolean deleted = noticeDeleteService.deleteNotice(noticeDeleteRequestDTO);
+            if(deleted) {
+                return new ResultDTO<>().makeResult(HttpStatus.OK, "Notice deleted successfully", null, "data");
+            } else {
+                return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Notice delete failed", null, "error");
+            }
+        } else {
+            return new ResultDTO<>().makeResult(HttpStatus.FORBIDDEN, "Only administrators can delete notices.", null, "error");
         }
     }
 }
