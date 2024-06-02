@@ -28,6 +28,7 @@ public class BoardController {
     private final HeartService heartService;
     private final BoardDetailService boardDetailService;
     private final CommentService commentService;
+    private final NoticeWriteService noticeWriteService;
 
     // 게시글 쓰기
     @PostMapping("/write")
@@ -144,6 +145,7 @@ public class BoardController {
         }
     }
 
+    // 댓글 수정
     @PostMapping("/commentUpdate")
     public ResultDTO<?> updateComment(@RequestBody CommentUpdateRequestDTO commentUpdateRequestDTO) {
         try {
@@ -151,6 +153,17 @@ public class BoardController {
             return new ResultDTO<>().makeResult(HttpStatus.OK, "Comment updated successfully", commentResponseDTO, "data");
         } catch (IllegalArgumentException e) {
             return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Comment update fail", null, "error");
+        }
+    }
+
+    // 공지사항 게시글 쓰기
+    @PostMapping("/writeNotice")
+    public ResultDTO<?> writeNotice(@RequestBody NoticeRequestDTO noticeRequestDTO) {
+        if(noticeRequestDTO.getUserId() == 2L) {
+            NoticeWriteResponseDTO responseDTO = noticeWriteService.writeNotice(noticeRequestDTO);
+            return new ResultDTO<>().makeResult(HttpStatus.OK, "Notice created successfully", responseDTO, "data");
+        } else {
+            return new ResultDTO<>().makeResult(HttpStatus.FORBIDDEN, "Only administrators can write notices.", null, "error");
         }
     }
 }
