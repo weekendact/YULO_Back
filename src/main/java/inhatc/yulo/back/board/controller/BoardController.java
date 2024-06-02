@@ -29,6 +29,7 @@ public class BoardController {
     private final BoardDetailService boardDetailService;
     private final CommentService commentService;
     private final NoticeWriteService noticeWriteService;
+    private final NoticeUpdateService noticeUpdateService;
 
     // 게시글 쓰기
     @PostMapping("/write")
@@ -55,12 +56,12 @@ public class BoardController {
 
         Map<String, Object> responseData = new HashMap<>();
         responseData.put("content", boardPage.getContent());
-//        responseData.put("totalElements", boardPage.getTotalElements()); // 전체 요소 수
-//        responseData.put("totalPages", boardPage.getTotalPages()); // 전체 페이지 수
-//        responseData.put("number", boardPage.getNumber()); // 현재 페이지 번호
-//        responseData.put("size", boardPage.getSize()); // 페이지당 요소 수
-//        responseData.put("first", boardPage.isFirst()); // 첫 번째 페이지인지 여부
-//        responseData.put("last", boardPage.isLast()); // 마지막 페이지인지 여부
+        responseData.put("totalElements", boardPage.getTotalElements()); // 전체 요소 수
+        responseData.put("totalPages", boardPage.getTotalPages()); // 전체 페이지 수
+        responseData.put("number", boardPage.getNumber()); // 현재 페이지 번호
+        responseData.put("size", boardPage.getSize()); // 페이지당 요소 수
+        responseData.put("first", boardPage.isFirst()); // 첫 번째 페이지인지 여부
+        responseData.put("last", boardPage.isLast()); // 마지막 페이지인지 여부
 
         return new ResultDTO<>().makeResult(HttpStatus.OK, "Board list retrieved successfully", responseData, "data");
     }
@@ -164,6 +165,21 @@ public class BoardController {
             return new ResultDTO<>().makeResult(HttpStatus.OK, "Notice created successfully", responseDTO, "data");
         } else {
             return new ResultDTO<>().makeResult(HttpStatus.FORBIDDEN, "Only administrators can write notices.", null, "error");
+        }
+    }
+
+    // 공지사항 게시글 수정
+    @PutMapping("/updateNotice")
+    public ResultDTO<?> updateNotice(@RequestBody NoticeUpdateRequestDTO noticeUpdateRequestDTO) {
+        if (noticeUpdateRequestDTO.getUserId() == 2L) {
+            try {
+                NoticeUpdateResponseDTO responseDTO = noticeUpdateService.updateNotice(noticeUpdateRequestDTO);
+                return new ResultDTO<>().makeResult(HttpStatus.OK, "Notice updated successfully", responseDTO, "data");
+            } catch (IllegalArgumentException e) {
+                return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Notice update failed: " + e.getMessage(), null, "error");
+            }
+        } else {
+            return new ResultDTO<>().makeResult(HttpStatus.FORBIDDEN, "Only administrators can update notices.", null, "error");
         }
     }
 }
