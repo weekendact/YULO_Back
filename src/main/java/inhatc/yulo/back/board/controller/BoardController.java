@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ public class BoardController {
     private final NoticeUpdateService noticeUpdateService;
     private final NoticeDeleteService noticeDeleteService;
     private final NoticeDetailService noticeDetailService;
+    private final NoticeListService noticeListService;
 
     // 게시글 쓰기
     @PostMapping("/write")
@@ -51,7 +53,7 @@ public class BoardController {
         }
     }
 
-    // 전체 리스트 보기
+    // 게시글 리스트 보기
     @GetMapping("/list")
     public ResultDTO<?> getBoardList(@RequestParam(defaultValue = "1") int page) {
         Page<BoardListResponseDTO> boardPage = boardListService.getBoardList(page);
@@ -209,5 +211,24 @@ public class BoardController {
         } catch (IllegalArgumentException e) {
             return new ResultDTO<>().makeResult(HttpStatus.NOT_FOUND, "Notice Detail fail.", null, "error");
         }
+    }
+
+    // 공지사항 리스트 조회
+    @GetMapping("/listNotice")
+    public ResultDTO<?> getNoticeList(@RequestParam(defaultValue = "1") int page) {
+        Page<NoticeListResponseDTO> noticePage = noticeListService.getNoticeList(page);
+
+        Map<String, Object> responseData = new LinkedHashMap<>();
+        responseData.put("content", noticePage.getContent());
+        responseData.put("totalElements", noticePage.getTotalElements()); // 전체 요소 수
+        responseData.put("totalPages", noticePage.getTotalPages()); // 전체 페이지 수
+        responseData.put("number", noticePage.getNumber()); // 현재 페이지 번호
+        responseData.put("size", noticePage.getSize()); // 페이지당 요소 수
+        responseData.put("first", noticePage.isFirst()); // 첫 번째 페이지인지 여부
+        responseData.put("last", noticePage.isLast()); // 마지막 페이지인지 여부
+
+        System.out.println("Response Data: " + responseData); // 디버깅 로그 추가
+
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "Board list retrieved successfully", responseData, "data");
     }
 }
