@@ -14,6 +14,8 @@ public class BoardListResponseDTO {
 
     private String title; // 제목
 
+    private String content; // 간략한 내용
+
     private String userName; // 작성자 이름
 
 }

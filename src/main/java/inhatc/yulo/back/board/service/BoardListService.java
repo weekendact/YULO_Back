@@ -29,14 +29,24 @@ public class BoardListService {
         List<BoardListResponseDTO> responseDTOList = new ArrayList<>();
 
         for (Board board : boardPage.getContent()) {
+            String truncatedContent = truncateContent(board.getContent(), 15);
             BoardListResponseDTO responseDTO = BoardListResponseDTO.builder()
                     .boardId(board.getId())
                     .title(board.getTitle())
+                    .content(truncatedContent)
                     .userName(board.getUser().getUserName())
                     .build();
             responseDTOList.add(responseDTO);
         }
 
         return new PageImpl<>(responseDTOList, pageable, boardPage.getTotalElements());
+    }
+
+    private String truncateContent(String content, int length) {
+        if (content.length() > length) {
+            return content.substring(0, length) + ".....";
+        } else {
+            return content;
+        }
     }
 }
