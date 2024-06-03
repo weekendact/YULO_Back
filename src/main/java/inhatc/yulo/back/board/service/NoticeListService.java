@@ -33,6 +33,7 @@ public class NoticeListService {
                     .noticeId(notice.getId())
                     .title(notice.getContent())
                     .userName(notice.getUser().getUserName())
+                    .createDate(notice.getCreateDate())
                     .build();
             responseDTOList.add(responseDTO);
         }
