@@ -12,6 +12,8 @@ public class CommentDeleteRequestDTO {
 
     private Long userId;
 
+    private Long noticeId;
+
     private Long boardId;
 
     private Long commentId;

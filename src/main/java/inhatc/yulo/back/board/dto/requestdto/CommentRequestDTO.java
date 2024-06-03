@@ -12,6 +12,8 @@ public class CommentRequestDTO {
 
     private Long boardId;
 
+    private Long noticeId;
+
     private Long userId;
 
     private String content;
