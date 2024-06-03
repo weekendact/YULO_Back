@@ -12,4 +12,7 @@ public class CameraAddRequestDTO {
     private Long modelId;
     private Integer label;
     private Integer count;
+    private Double cameraLatitude;
+    private Double cameraLongitude;
+
 }
