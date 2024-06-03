@@ -31,6 +31,7 @@ public class BoardController {
     private final NoticeWriteService noticeWriteService;
     private final NoticeUpdateService noticeUpdateService;
     private final NoticeDeleteService noticeDeleteService;
+    private final NoticeDetailService noticeDetailService;
 
     // 게시글 쓰기
     @PostMapping("/write")
@@ -196,6 +197,17 @@ public class BoardController {
             }
         } else {
             return new ResultDTO<>().makeResult(HttpStatus.FORBIDDEN, "Only administrators can delete notices.", null, "error");
+        }
+    }
+
+    // 공지사항 상세 조회
+    @PostMapping("/detailNotice")
+    public ResultDTO<?> detailNotice(@RequestBody NoticeDetailRequestDTO noticeDetailRequestDTO) {
+        try {
+            NoticeDetailResponseDTO noticeDetail = noticeDetailService.getNoticeDetail(noticeDetailRequestDTO.getNoticeId());
+            return new ResultDTO<>().makeResult(HttpStatus.OK, "Notice detail fetched successfully", noticeDetail, "data");
+        } catch (IllegalArgumentException e) {
+            return new ResultDTO<>().makeResult(HttpStatus.NOT_FOUND, "Notice Detail fail.", null, "error");
         }
     }
 }
