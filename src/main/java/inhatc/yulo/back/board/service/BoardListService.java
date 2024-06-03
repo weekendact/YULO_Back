@@ -35,6 +35,7 @@ public class BoardListService {
                     .title(board.getTitle())
                     .content(truncatedContent)
                     .userName(board.getUser().getUserName())
+                    .createDate(board.getCreateDate())
                     .build();
             responseDTOList.add(responseDTO);
         }

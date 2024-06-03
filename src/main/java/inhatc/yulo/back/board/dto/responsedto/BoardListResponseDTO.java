@@ -1,6 +1,9 @@
 package inhatc.yulo.back.board.dto.responsedto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -17,5 +20,8 @@ public class BoardListResponseDTO {
     private String content; // 간략한 내용
 
     private String userName; // 작성자 이름
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDateTime createDate;
 
 }
