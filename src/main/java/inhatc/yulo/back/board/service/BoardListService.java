@@ -22,7 +22,7 @@ public class BoardListService {
     private final BoardRepository boardRepository;
 
     public Page<BoardListResponseDTO> getBoardList(int page) {
-        int pageSize = 10;
+        int pageSize = 8;
         Pageable pageable = PageRequest.of(page - 1, pageSize); // 페이지 번호는 0부터 시작
 
         Page<Board> boardPage = boardRepository.findAll(pageable);
