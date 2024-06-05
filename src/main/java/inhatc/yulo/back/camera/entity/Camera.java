@@ -45,4 +45,11 @@ public class Camera {
 
     @Column(name = "count")
     private Integer count;
+
+    @Column(name = "latitude")
+    private Double cameraLatitude;
+
+    @Column(name = "longitude")
+    private Double cameraLongitude;
+
 }
