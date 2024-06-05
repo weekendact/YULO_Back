@@ -108,7 +108,7 @@ public class BoardController {
         if (deleted) {
             return new ResultDTO<>().makeResult(HttpStatus.OK, "Board delete successfully", null, "data");
         } else {
-            return new ResultDTO<>().makeResult(HttpStatus.NOT_FOUND, "Board not delete fail", null, "error");
+            return new ResultDTO<>().makeResult(HttpStatus.NOT_FOUND, "Board deletion failed", null, "error");
         }
     }
 
