@@ -1,15 +1,19 @@
 package inhatc.yulo.back.detection.controller;
 
 import inhatc.yulo.back.detection.dto.requestDTO.*;
+import inhatc.yulo.back.detection.dto.responseDTO.DetectionResponseDTO;
 import inhatc.yulo.back.detection.service.*;
 import inhatc.yulo.back.resultdto.ResultDTO;
 
 import inhatc.yulo.back.detection.dto.responseDTO.DetectionGraphResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("detection")
@@ -35,9 +39,20 @@ public class DetectionController {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detections, "data");
     }
 
-    @PostMapping("/detections")
-    public ResultDTO<?> detectionList(@RequestBody DetectionRequestDTO detectionRequestDTO) {
-        return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detectionListGetService.getDetectionList(detectionRequestDTO), "data");
+    @GetMapping ("/detections")
+    public ResultDTO<?> detectionList(@RequestParam Long userId, @RequestParam(defaultValue = "1") int page) {
+        Page<DetectionResponseDTO> detectionPage = detectionListGetService.getDetectionList(userId, page);
+
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("content", detectionPage.getContent());
+        responseData.put("totalElements", detectionPage.getTotalElements()); // 전체 요소 수
+        responseData.put("totalPages", detectionPage.getTotalPages()); // 전체 페이지 수
+        responseData.put("number", detectionPage.getNumber()); // 현재 페이지 번호
+        responseData.put("size", detectionPage.getSize()); // 페이지당 요소 수
+        responseData.put("first", detectionPage.isFirst()); // 첫 번째 페이지인지 여부
+        responseData.put("last", detectionPage.isLast()); // 마지막 페이지인지 여부
+
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "Detection list retrieved successfully", responseData, "data");
     }
 
     @PostMapping("/detectionCheck")
