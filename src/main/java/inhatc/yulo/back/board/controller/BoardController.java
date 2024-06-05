@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,12 +55,18 @@ public class BoardController {
 
     // 게시글 수정
     @PutMapping("/update")
-    public ResultDTO<?> updateBoard(@RequestBody BoardUpdateRequestDTO boardUpdateRequestDTO) {
+    public ResultDTO<?> updateBoard(@RequestPart BoardUpdateRequestDTO boardUpdateRequestDTO,
+                                    @RequestPart(required = false) MultipartFile[] newFiles,
+                                    @RequestParam(required = false) Long[] deleteFileId) {
         try {
+            boardUpdateRequestDTO.setNewFiles(newFiles);
+            boardUpdateRequestDTO.setDeleteFileId(deleteFileId);
             BoardUpdateResponseDTO responseDTO = boardUpdateService.updateBoard(boardUpdateRequestDTO);
             return new ResultDTO<>().makeResult(HttpStatus.OK, "Board updated successfully", responseDTO, "data");
         } catch (IllegalArgumentException e) {
             return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Board updated fail", null, "error");
+        } catch (IOException e) {
+            return new ResultDTO<>().makeResult(HttpStatus.INTERNAL_SERVER_ERROR, "File processing error", null, "error");
         }
     }
 
