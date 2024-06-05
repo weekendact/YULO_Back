@@ -43,13 +43,11 @@ public class BoardController {
 
     // 게시글 쓰기
     @PostMapping("/write")
-    public ResultDTO<?> writeBoard(@RequestPart BoardWriteRequestDTO boardWriteRequestDTO, @RequestPart(required = false) MultipartFile file) {
+    public ResultDTO<?> writeBoard(@RequestPart BoardWriteRequestDTO boardWriteRequestDTO, @RequestPart(required = false) MultipartFile[] files) {
         try {
-            logger.debug("writeBoard called with DTO: {}, file: {}", boardWriteRequestDTO, file != null ? file.getOriginalFilename() : "no file");
-            BoardWriteResponseDTO responseDTO = boardWriteService.writeBoard(boardWriteRequestDTO, file);
+            BoardWriteResponseDTO responseDTO = boardWriteService.writeBoard(boardWriteRequestDTO, files);
             return new ResultDTO<>().makeResult(HttpStatus.OK, "Board created successfully", responseDTO, "data");
         } catch (Exception e) {
-            logger.error("Error creating board", e);
             return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Board creation failed", null, "error");
         }
     }

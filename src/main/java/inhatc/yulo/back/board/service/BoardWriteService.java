@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 @Service
 public class BoardWriteService {
 
-    private static final Logger logger = LoggerFactory.getLogger(BoardWriteService.class);
 
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
@@ -35,7 +34,7 @@ public class BoardWriteService {
     private final String uploadDir = "C:/path/to/upload";
 
     @Transactional
-    public BoardWriteResponseDTO writeBoard(BoardWriteRequestDTO boardWriteRequestDTO, MultipartFile file) throws IOException {
+    public BoardWriteResponseDTO writeBoard(BoardWriteRequestDTO boardWriteRequestDTO, MultipartFile[] files) throws IOException {
 
         User user = userRepository.findById(boardWriteRequestDTO.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
@@ -48,34 +47,37 @@ public class BoardWriteService {
 
         Board savedBoard = boardRepository.save(board);
 
-        if (file != null && !file.isEmpty()) {
-            String origFilename = file.getOriginalFilename();
-            String fileName = System.currentTimeMillis() + "_" + origFilename;
-            Path filePath = Paths.get(uploadDir, fileName);
+        if (files != null && files.length > 0) {
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    String origFilename = file.getOriginalFilename();
+                    String fileName = System.currentTimeMillis() + "_" + origFilename;
+                    Path filePath = Paths.get(uploadDir, fileName);
+                    // 디렉터리 생성
+                    if (!Files.exists(filePath.getParent())) {
+                        Files.createDirectories(filePath.getParent());
+                    }
+                    Files.write(filePath, file.getBytes());
 
-            // 디렉터리 생성
-            if (!Files.exists(filePath.getParent())) {
-                Files.createDirectories(filePath.getParent());
+                    File fileEntity = File.builder()
+                            .origFilename(origFilename)
+                            .fileName(fileName)
+                            .filePath(filePath.toString())
+                            .board(savedBoard)
+                            .build();
+                    fileRepository.save(fileEntity);
+                }
             }
-            Files.write(filePath, file.getBytes());
-
-            File fileEntity = File.builder()
-                    .origFilename(origFilename)
-                    .fileName(fileName)
-                    .filePath(filePath.toString())
-                    .board(savedBoard)
-                    .build();
-            fileRepository.save(fileEntity);
         }
         // 파일 리스트 조회
-        List<File> files = fileRepository.findByBoardId(savedBoard.getId());
+        List<File> filesList = fileRepository.findByBoardId(savedBoard.getId());
 
             return BoardWriteResponseDTO.builder()
                     .userName(user.getUserName())
                     .title(savedBoard.getTitle())
                     .content(savedBoard.getContent())
                     .createDate(savedBoard.getCreateDate())
-                    .files(files)
+                    .files(filesList)
                     .build();
         }
 }
