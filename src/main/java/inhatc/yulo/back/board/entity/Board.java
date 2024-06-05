@@ -35,7 +35,4 @@ public class Board extends BaseTimeEntity{
 
     private int heartCount; // 좋아요 수
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<File> files; // 첨부 파일들
 }
