@@ -18,20 +18,25 @@ public class CameraSettingService {
 
     public List<CameraSettingResponseDTO> cameraSettingList(CameraSettingRequestDTO cameraSettingRequestDTO) {
         List<Camera> cameraList = cameraRepository.findByUserId(cameraSettingRequestDTO.getUserId());
+        // null 값으로 받았을 때 처리가 가능한지 확인
+        if (cameraList.isEmpty()) return null;
+
         List<CameraSettingResponseDTO> cameraSettingResponseDTOList = new ArrayList<>();
 
-        for (Camera camera : cameraList) {
-            CameraSettingResponseDTO cameraSettingResponseDTO = new CameraSettingResponseDTO();
-            cameraSettingResponseDTO.setCameraName(camera.getCameraName());
-            cameraSettingResponseDTO.setCameraURL(camera.getCameraURL());
-            cameraSettingResponseDTO.setCameraId(camera.getCameraId());
-            cameraSettingResponseDTO.setGraphURL(camera.getGraphURL());
-            cameraSettingResponseDTO.setStreamURL(camera.getStreamURL());
-            cameraSettingResponseDTO.setModelId(camera.getModel().getModelId());
+        cameraList
+                .forEach(camera -> {
+                    CameraSettingResponseDTO cameraSettingResponseDTO = new CameraSettingResponseDTO();
+                    cameraSettingResponseDTO.setCameraName(camera.getCameraName());
+                    cameraSettingResponseDTO.setCameraURL(camera.getCameraURL());
+                    cameraSettingResponseDTO.setCameraId(camera.getCameraId());
+                    cameraSettingResponseDTO.setGraphURL(camera.getGraphURL());
+                    cameraSettingResponseDTO.setStreamURL(camera.getStreamURL());
+                    cameraSettingResponseDTO.setModelId(camera.getModel().getModelId());
 
-            cameraSettingResponseDTOList.add(cameraSettingResponseDTO);
-        }
+                    cameraSettingResponseDTOList.add(cameraSettingResponseDTO);
+                });
 
         return cameraSettingResponseDTOList;
+
     }
 }

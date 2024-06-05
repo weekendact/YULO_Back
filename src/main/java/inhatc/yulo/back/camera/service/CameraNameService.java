@@ -48,7 +48,6 @@ public class CameraNameService {
             resultMap.put(cameraName, detectionCount);
         }
         resultMap.put("todayDetection", todayDetectionCount);
-
         return resultMap;
     }
 }

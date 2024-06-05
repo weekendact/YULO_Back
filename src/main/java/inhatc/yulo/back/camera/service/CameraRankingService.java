@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CameraRankingService {
@@ -17,23 +19,17 @@ public class CameraRankingService {
     private DetectionRepository detectionRepository;
 
     public Map<String, Object> findCameraRanking(CameraRankingRequestDTO cameraRankingRequestDTO) {
-         List<Object []> DetectionList = detectionRepository.findCameraDetectionCountsByUserId(cameraRankingRequestDTO.getUserId());
-         Map<String, Object> resultMap = new HashMap<>();
+        List<Object[]> detectionList = detectionRepository.findCameraDetectionCountsByUserId(cameraRankingRequestDTO.getUserId());
 
-         if (DetectionList.isEmpty()) {
-             resultMap.put("", 0);
-             return resultMap;
-         }
+        if (detectionList.isEmpty()) {
+            return Collections.singletonMap("", 0);
+        }
 
-         for(Object[] detection : DetectionList) {
-             String cameraName = (String) detection[0];
-             Long detectionCount = (Long) detection[1];
-
-             resultMap.put(cameraName, detectionCount);
-         }
-
-        return resultMap;
+        return detectionList.stream()
+                .collect(Collectors.toMap(
+                        detection -> (String) detection[0],
+                        detection -> (Long) detection[1]
+                ));
     }
-
 
 }
