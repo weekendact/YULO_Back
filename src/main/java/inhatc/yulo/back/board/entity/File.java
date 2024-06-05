@@ -1,5 +1,6 @@
 package inhatc.yulo.back.board.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,10 @@ public class File {
 
     @JoinColumn(name = "board_id")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Board board;
+
+    private String origFilename;
 
     private String fileName; // 파일 이름
 

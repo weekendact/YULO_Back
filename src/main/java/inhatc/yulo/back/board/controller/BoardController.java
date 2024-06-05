@@ -6,9 +6,13 @@ import inhatc.yulo.back.board.entity.Board;
 import inhatc.yulo.back.board.service.*;
 import inhatc.yulo.back.resultdto.ResultDTO;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -34,12 +38,20 @@ public class BoardController {
     private final NoticeDeleteService noticeDeleteService;
     private final NoticeDetailService noticeDetailService;
     private final NoticeListService noticeListService;
+    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+
 
     // 게시글 쓰기
     @PostMapping("/write")
-    public ResultDTO<?> writeBoard(@RequestBody BoardWriteRequestDTO boardWriteRequestDTO) {
-        BoardWriteResponseDTO responseDTO = boardWriteService.writeBoard(boardWriteRequestDTO);
-        return new ResultDTO<>().makeResult(HttpStatus.OK, "Board created successfully", responseDTO, "data");
+    public ResultDTO<?> writeBoard(@RequestPart BoardWriteRequestDTO boardWriteRequestDTO, @RequestPart(required = false) MultipartFile file) {
+        try {
+            logger.debug("writeBoard called with DTO: {}, file: {}", boardWriteRequestDTO, file != null ? file.getOriginalFilename() : "no file");
+            BoardWriteResponseDTO responseDTO = boardWriteService.writeBoard(boardWriteRequestDTO, file);
+            return new ResultDTO<>().makeResult(HttpStatus.OK, "Board created successfully", responseDTO, "data");
+        } catch (Exception e) {
+            logger.error("Error creating board", e);
+            return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Board creation failed", null, "error");
+        }
     }
 
     // 게시글 수정

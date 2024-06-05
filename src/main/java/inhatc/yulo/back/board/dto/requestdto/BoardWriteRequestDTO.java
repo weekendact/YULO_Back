@@ -2,6 +2,8 @@ package inhatc.yulo.back.board.dto.requestdto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @ToString
@@ -15,6 +17,7 @@ public class BoardWriteRequestDTO {
     private String title; // 제목
 
     private String content; // 내용
+
 
 
 }
