@@ -4,8 +4,10 @@ import inhatc.yulo.back.board.dto.responsedto.BoardDetailResponseDTO;
 import inhatc.yulo.back.board.dto.responsedto.CommentResponseDTO;
 import inhatc.yulo.back.board.entity.Board;
 import inhatc.yulo.back.board.entity.Comment;
+import inhatc.yulo.back.board.entity.File;
 import inhatc.yulo.back.board.repository.BoardRepository;
 import inhatc.yulo.back.board.repository.CommentRepository;
+import inhatc.yulo.back.board.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ public class BoardDetailService {
 
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
+    private final FileRepository fileRepository;
 
     public BoardDetailResponseDTO getBoardDetail(Long boardId) {
         Board board = boardRepository.findById(boardId)
@@ -37,6 +40,9 @@ public class BoardDetailService {
             comments.add(commentDTO);
         }
 
+        // 게시판에 있는 파일
+        List<File> files = fileRepository.findByBoardId(boardId);
+
         return BoardDetailResponseDTO.builder()
                 .boardId(board.getId())
                 .title(board.getTitle())
@@ -46,6 +52,7 @@ public class BoardDetailService {
                 .modifiedDate(board.getModifiedDate())
                 .heartCount(board.getHeartCount())
                 .comments(comments)
+                .files(files)
                 .build();
 
 

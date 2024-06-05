@@ -1,6 +1,7 @@
 package inhatc.yulo.back.board.dto.responsedto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import inhatc.yulo.back.board.entity.File;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -31,4 +32,6 @@ public class BoardDetailResponseDTO {
     private int heartCount;
 
     private List<CommentResponseDTO> comments;
+
+    private List<File> files; // 파일 리스트 추가
 }
