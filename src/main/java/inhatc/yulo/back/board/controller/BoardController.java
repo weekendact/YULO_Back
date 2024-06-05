@@ -180,10 +180,16 @@ public class BoardController {
 
     // 공지사항 게시글 쓰기
     @PostMapping("/writeNotice")
-    public ResultDTO<?> writeNotice(@RequestBody NoticeRequestDTO noticeRequestDTO) {
+    public ResultDTO<?> writeNotice(@RequestPart NoticeRequestDTO noticeRequestDTO,
+                                    @RequestPart(required = false) MultipartFile[] files) {
         if(noticeRequestDTO.getUserId() == 2L) {
-            NoticeWriteResponseDTO responseDTO = noticeWriteService.writeNotice(noticeRequestDTO);
-            return new ResultDTO<>().makeResult(HttpStatus.OK, "Notice created successfully", responseDTO, "data");
+            try {
+                noticeRequestDTO.setFiles(files);
+                NoticeWriteResponseDTO responseDTO = noticeWriteService.writeNotice(noticeRequestDTO);
+                return new ResultDTO<>().makeResult(HttpStatus.OK, "Notice created successfully", responseDTO, "data");
+            } catch (Exception e) {
+                return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Notice creation failed", null, "error");
+            }
         } else {
             return new ResultDTO<>().makeResult(HttpStatus.FORBIDDEN, "Only administrators can write notices.", null, "error");
         }

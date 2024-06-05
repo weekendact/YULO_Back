@@ -23,6 +23,11 @@ public class File {
     @JsonBackReference
     private Board board;
 
+    @JoinColumn(name = "notice_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Notice notice;
+
     private String origFilename;
 
     private String fileName; // 파일 이름
