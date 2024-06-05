@@ -197,13 +197,19 @@ public class BoardController {
 
     // 공지사항 게시글 수정
     @PutMapping("/updateNotice")
-    public ResultDTO<?> updateNotice(@RequestBody NoticeUpdateRequestDTO noticeUpdateRequestDTO) {
+    public ResultDTO<?> updateNotice(@RequestPart NoticeUpdateRequestDTO noticeUpdateRequestDTO,
+                                     @RequestPart(required = false) MultipartFile[] newFiles,
+                                     @RequestParam(required = false) Long[] deleteFileId) {
         if (noticeUpdateRequestDTO.getUserId() == 2L) {
             try {
+                noticeUpdateRequestDTO.setNewFiles(newFiles);
+                noticeUpdateRequestDTO.setDeleteFileId(deleteFileId);
                 NoticeUpdateResponseDTO responseDTO = noticeUpdateService.updateNotice(noticeUpdateRequestDTO);
                 return new ResultDTO<>().makeResult(HttpStatus.OK, "Notice updated successfully", responseDTO, "data");
             } catch (IllegalArgumentException e) {
-                return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Notice update failed: " + e.getMessage(), null, "error");
+                return new ResultDTO<>().makeResult(HttpStatus.BAD_REQUEST, "Notice update failed", null, "error");
+            } catch (IOException e) {
+                return new ResultDTO<>().makeResult(HttpStatus.INTERNAL_SERVER_ERROR, "File processing error", null, "error");
             }
         } else {
             return new ResultDTO<>().makeResult(HttpStatus.FORBIDDEN, "Only administrators can update notices.", null, "error");

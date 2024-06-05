@@ -1,9 +1,11 @@
 package inhatc.yulo.back.board.dto.responsedto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import inhatc.yulo.back.board.entity.File;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -24,4 +26,6 @@ public class NoticeUpdateResponseDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDateTime updateDate;
+
+    private List<File> files; // 파일 리스트 추가
 }

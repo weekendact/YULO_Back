@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FileRepository extends JpaRepository<File, Long> {
     List<File> findByBoardId(Long boardId);
+    List<File> findByNoticeId(Long noticeId);
 }
