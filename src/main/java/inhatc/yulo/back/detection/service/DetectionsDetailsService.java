@@ -18,11 +18,15 @@ public class DetectionsDetailsService {
 
     public List<DetectionResponseDTO> findDetectionDetails(DetectionsDetailsRequestDTO detectionsDetailsRequestDTO) {
         List<Object[]> detectionDetailsList = detectionRepository.findDetectionDetailsByUserIdAndCameraNameBetweenDates(
-                detectionsDetailsRequestDTO.getUserId(), detectionsDetailsRequestDTO.getCameraName(), detectionsDetailsRequestDTO.getStartDate(), detectionsDetailsRequestDTO.getEndDate());
+                detectionsDetailsRequestDTO.getUserId(),
+                detectionsDetailsRequestDTO.getCameraName(),
+                detectionsDetailsRequestDTO.getStartDate(),
+                detectionsDetailsRequestDTO.getEndDate());
 
         List<DetectionResponseDTO> detectionResponseDTOList = new ArrayList<>();
 
-        for (Object[] detectionDetails : detectionDetailsList) {
+        detectionDetailsList
+                .forEach(detectionDetails -> {
             DetectionResponseDTO detectionResponseDTO = new DetectionResponseDTO();
 
             detectionResponseDTO.setCameraName((String)detectionDetails[0]);
@@ -33,7 +37,8 @@ public class DetectionsDetailsService {
             detectionResponseDTO.setModelId((Long) detectionDetails[5]);
 
             detectionResponseDTOList.add(detectionResponseDTO);
-        }
+        });
+
         return detectionResponseDTOList;
     }
 }

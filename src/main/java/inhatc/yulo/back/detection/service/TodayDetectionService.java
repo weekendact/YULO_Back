@@ -23,13 +23,11 @@ public class TodayDetectionService {
                 todayDetectionRequestDTO.getUserId(), todayDetectionRequestDTO.getCameraName());
 
         LocalDate today = LocalDate.now(ZoneId.systemDefault());
-        long detectionCount = 0;
 
-        for (Detection detection : detections) {
-            if (detection.getDetectionDate().toLocalDate().isEqual(today)) {
-                detectionCount++;
-            }
-        }
+        long detectionCount = detections.stream()
+                .filter(detection -> detection.getDetectionDate().toLocalDate().isEqual(LocalDate.now(ZoneId.systemDefault())))
+                .count();
+        
 
         if (detectionCount > 0) {
             TodayDetectionResponseDTO todayDetectionResponseDTO = new TodayDetectionResponseDTO();

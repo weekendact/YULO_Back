@@ -21,17 +21,19 @@ public class DetectionGraphService {
 
 
     public List<DetectionGraphResponseDTO> getDetection(DetectionGraphRequestDTO detectionGraphRequestDTO) {
-        List<Detection> detections = detectionRepository.findDetectionsByUserIdAndCameraName(detectionGraphRequestDTO.getUserId(), detectionGraphRequestDTO.getCameraName());
-        List<DetectionGraphResponseDTO> detectionGraphResponseDTOS = new ArrayList<>();
+        List<Detection> detectionList = detectionRepository.findDetectionsByUserIdAndCameraName(detectionGraphRequestDTO.getUserId(), detectionGraphRequestDTO.getCameraName());
+        List<DetectionGraphResponseDTO> detectionGraphResponseDTOList = new ArrayList<>();
 
+        detectionList
+                .stream().toList()
+                .forEach(detection -> {
+                    DetectionGraphResponseDTO detectionGraphResponseDTO = new DetectionGraphResponseDTO();
+                    detectionGraphResponseDTO.setDetectionDate(detection.getDetectionDate());
+                    detectionGraphResponseDTO.setDetectionCount(null);
 
-        for(Detection detection : detections) {
-            DetectionGraphResponseDTO dto = new DetectionGraphResponseDTO();
-            dto.setDetectionDate(detection.getDetectionDate());
-            dto.setDetectionCount(null);
-            detectionGraphResponseDTOS.add(dto);
-        }
+                    detectionGraphResponseDTOList.add(detectionGraphResponseDTO);
+                });
 
-        return detectionGraphResponseDTOS;
+        return detectionGraphResponseDTOList;
     }
 }
