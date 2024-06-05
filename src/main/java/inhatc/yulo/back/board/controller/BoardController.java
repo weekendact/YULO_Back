@@ -39,7 +39,7 @@ public class BoardController {
     private final NoticeDeleteService noticeDeleteService;
     private final NoticeDetailService noticeDetailService;
     private final NoticeListService noticeListService;
-    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+    private final UserInfoService userInfoService;
 
 
     // 게시글 쓰기
@@ -260,4 +260,17 @@ public class BoardController {
 
         return new ResultDTO<>().makeResult(HttpStatus.OK, "Board list retrieved successfully", responseData, "data");
     }
+
+    // 사용자 정보
+    @PostMapping("/info")
+    public ResultDTO<?> getUserInfo(@RequestBody UserInfoRequestDTO userInfoRequestDTO) {
+        try {
+            UserInfoResponseDTO userInfoResponseDTO = userInfoService.getUserInfo(userInfoRequestDTO);
+            return new ResultDTO<>().makeResult(HttpStatus.OK, "User info retrieved successfully", userInfoResponseDTO, "data");
+        } catch (IllegalArgumentException e) {
+            return new ResultDTO<>().makeResult(HttpStatus.NOT_FOUND, "User not found", null, "error");
+        }
+    }
 }
+
+
