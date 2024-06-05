@@ -1,6 +1,7 @@
 package inhatc.yulo.back.board.dto.responsedto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import inhatc.yulo.back.board.entity.File;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -29,4 +30,6 @@ public class NoticeDetailResponseDTO {
     private LocalDateTime modifiedDate;
 
     private List<CommentResponseDTO> comments;
+
+    private List<File> files;
 }

@@ -3,8 +3,10 @@ package inhatc.yulo.back.board.service;
 import inhatc.yulo.back.board.dto.responsedto.CommentResponseDTO;
 import inhatc.yulo.back.board.dto.responsedto.NoticeDetailResponseDTO;
 import inhatc.yulo.back.board.entity.Comment;
+import inhatc.yulo.back.board.entity.File;
 import inhatc.yulo.back.board.entity.Notice;
 import inhatc.yulo.back.board.repository.CommentRepository;
+import inhatc.yulo.back.board.repository.FileRepository;
 import inhatc.yulo.back.board.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class NoticeDetailService {
 
     private final NoticeRepository noticeRepository;
     private final CommentRepository commentRepository;
+    private final FileRepository fileRepository;
 
     public NoticeDetailResponseDTO getNoticeDetail(Long noticeId) {
         Notice notice = noticeRepository.findById(noticeId)
@@ -37,6 +40,9 @@ public class NoticeDetailService {
             comments.add(commentDTO);
         }
 
+        // 게시판에 있는 파일
+        List<File> files = fileRepository.findByNoticeId(noticeId);
+
         return NoticeDetailResponseDTO.builder()
                 .noticeId(notice.getId())
                 .title(notice.getTitle())
@@ -45,6 +51,7 @@ public class NoticeDetailService {
                 .createDate(notice.getCreateDate())
                 .modifiedDate(notice.getModifiedDate())
                 .comments(comments)
+                .files(files)
                 .build();
     }
 
