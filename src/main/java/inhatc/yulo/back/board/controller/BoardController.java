@@ -89,16 +89,36 @@ public class BoardController {
 
     // 제목으로 검색해서 리스트 보기
     @GetMapping("/searchByTitle")
-    public ResultDTO<?> searchBoardTitle(@RequestParam String title) {
-        List<BoardListResponseDTO> boardList = boardSearchService.searchBoard(title, null);
-        return new ResultDTO<>().makeResult(HttpStatus.OK, "Board title search successfully", boardList, "data");
+    public ResultDTO<?> searchBoardTitle(@RequestParam String title, @RequestParam(defaultValue = "1") int page) {
+        Page<BoardListResponseDTO> boardPage = boardSearchService.searchBoard(title, null, page);
+
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("content", boardPage.getContent());
+        responseData.put("totalElements", boardPage.getTotalElements()); // 전체 요소 수
+        responseData.put("totalPages", boardPage.getTotalPages()); // 전체 페이지 수
+        responseData.put("number", boardPage.getNumber()); // 현재 페이지 번호
+        responseData.put("size", boardPage.getSize()); // 페이지당 요소 수
+        responseData.put("first", boardPage.isFirst()); // 첫 번째 페이지인지 여부
+        responseData.put("last", boardPage.isLast()); // 마지막 페이지인지 여부
+
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "Board title search successfully", responseData, "data");
     }
 
     // 작성자로 검색해서 리스트 보기
     @GetMapping("/searchByUser")
-    public ResultDTO<?> searchBoardUserName(@RequestParam String userName) {
-        List<BoardListResponseDTO> boardList = boardSearchService.searchBoard(null, userName);
-        return new ResultDTO<>().makeResult(HttpStatus.OK, "Board username search successfully", boardList, "data");
+    public ResultDTO<?> searchBoardUserName(@RequestParam String userName, @RequestParam(defaultValue = "1") int page) {
+        Page<BoardListResponseDTO> boardPage = boardSearchService.searchBoard(null, userName, page);
+
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("content", boardPage.getContent());
+        responseData.put("totalElements", boardPage.getTotalElements()); // 전체 요소 수
+        responseData.put("totalPages", boardPage.getTotalPages()); // 전체 페이지 수
+        responseData.put("number", boardPage.getNumber()); // 현재 페이지 번호
+        responseData.put("size", boardPage.getSize()); // 페이지당 요소 수
+        responseData.put("first", boardPage.isFirst()); // 첫 번째 페이지인지 여부
+        responseData.put("last", boardPage.isLast()); // 마지막 페이지인지 여부
+
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "Board username search successfully", responseData, "data");
     }
 
     // 게시글 삭제
