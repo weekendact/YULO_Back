@@ -1,6 +1,7 @@
 package inhatc.yulo.back.detection.repository;
 
 import inhatc.yulo.back.detection.entity.Detection;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,7 +32,7 @@ public interface DetectionRepository extends JpaRepository<Detection, Long> {
             "JOIN Camera c ON d.camera.cameraId = c.cameraId " +
             "WHERE d.user.userId = :userId " +
             "ORDER BY d.detectionDate DESC")
-    List<Object[]> findDetectionsByUserId(Long userId, Pageable pageable);
+    Page<Object[]> findDetectionsByUserId(Long userId, Pageable pageable);
 
     @Query("SELECT c.cameraName, d.detectionDate, d.model.modelId, d.detectionServerPath, d.detectionChecked, d.model.modelId " +
             "FROM Detection d " +

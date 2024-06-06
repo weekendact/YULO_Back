@@ -24,7 +24,7 @@ public class DetectionListGetService {
         int pageSize = 10;
         Pageable pageable = PageRequest.of(page - 1, pageSize); // 페이지 번호는 0부터 시작
 
-        List<Object[]> detectionList =  detectionRepository.findDetectionsByUserId(userId, pageable);
+        Page<Object[]> detectionList =  detectionRepository.findDetectionsByUserId(userId, pageable);
         List<DetectionResponseDTO> detectionResponseDTOList = new ArrayList<>();
 
         detectionList
@@ -40,6 +40,6 @@ public class DetectionListGetService {
 
                     detectionResponseDTOList.add(detectionResponseDTO);
                 });
-        return new PageImpl<>(detectionResponseDTOList, pageable, detectionList.size());
+        return new PageImpl<>(detectionResponseDTOList, pageable, detectionList.getTotalElements());
     }
 }
