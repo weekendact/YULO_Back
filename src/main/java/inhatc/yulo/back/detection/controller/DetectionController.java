@@ -55,6 +55,11 @@ public class DetectionController {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "Detection list retrieved successfully", responseData, "data");
     }
 
+    @PostMapping("/detectionsList")
+    public ResultDTO<?> detectionList(@RequestBody DetectionRequestDTO detectionRequestDTO) {
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detectionListGetService.getDetectionList(detectionRequestDTO), "data");
+    }
+
     @PostMapping("/detectionCheck")
     public ResultDTO<?> detectionCheck(@RequestBody DetectionCheckedRequestDTO detectionCheckedRequestDTO) {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", detectionCheckedService.isDetectionChecked(detectionCheckedRequestDTO), "data");
