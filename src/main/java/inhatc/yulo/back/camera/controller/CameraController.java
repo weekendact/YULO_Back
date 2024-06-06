@@ -40,7 +40,7 @@ public class CameraController {
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data", cameraSettingService.cameraSettingList(cameraSettingRequestDTO), "data");
     }
 
-    @DeleteMapping("/cameraDelete")
+    @PostMapping("/cameraDelete")
     public ResultDTO<?> cameraDelete(@RequestBody CameraDeleteRequestDTO cameraDeleteRequestDTO) {
         cameraDeleteService.deleteCamera(cameraDeleteRequestDTO);
         return new ResultDTO<>().makeResult(HttpStatus.OK, "data");
