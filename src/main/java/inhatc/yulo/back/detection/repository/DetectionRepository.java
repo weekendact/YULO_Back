@@ -34,6 +34,13 @@ public interface DetectionRepository extends JpaRepository<Detection, Long> {
             "ORDER BY d.detectionDate DESC")
     Page<Object[]> findDetectionsByUserId(Long userId, Pageable pageable);
 
+    @Query("SELECT c.cameraName, d.model.modelId, d.detectionDate, d.detectionServerPath, d.detectionChecked, d.detectionId " +
+            "FROM Detection d " +
+            "JOIN Camera c ON d.camera.cameraId = c.cameraId " +
+            "WHERE d.user.userId = :userId " +
+            "ORDER BY d.detectionDate DESC")
+    List<Object[]> findDetectionsByUserId(Long userId);
+
     @Query("SELECT c.cameraName, d.detectionDate, d.model.modelId, d.detectionServerPath, d.detectionChecked, d.model.modelId " +
             "FROM Detection d " +
             "JOIN Camera c ON d.camera.cameraId = c.cameraId " +

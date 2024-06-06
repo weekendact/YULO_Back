@@ -42,4 +42,24 @@ public class DetectionListGetService {
                 });
         return new PageImpl<>(detectionResponseDTOList, pageable, detectionList.getTotalElements());
     }
+
+    public List<DetectionResponseDTO> getDetectionList(DetectionRequestDTO detectionRequestDTO) {
+        List<Object[]> detectionList = detectionRepository.findDetectionsByUserId(detectionRequestDTO.getUserId());
+        List<DetectionResponseDTO> detectionResponseDTOList = new ArrayList<>();
+
+        detectionList
+                .forEach(detection -> {
+                    DetectionResponseDTO detectionResponseDTO = new DetectionResponseDTO();
+
+                    detectionResponseDTO.setCameraName(detection[0].toString());
+                    detectionResponseDTO.setModelId((Long) detection[1]);
+                    detectionResponseDTO.setDetectionDate((LocalDateTime) detection[2]);
+                    detectionResponseDTO.setDetectionServerPath(detection[3].toString());
+                    detectionResponseDTO.setDetectionChecked((Boolean) detection[4]);
+                    detectionResponseDTO.setDetectionId((Long) detection[5]);
+
+                    detectionResponseDTOList.add(detectionResponseDTO);
+                });
+        return detectionResponseDTOList;
+    }
 }
