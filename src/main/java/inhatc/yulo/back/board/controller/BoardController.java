@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -297,11 +304,13 @@ public class BoardController {
         }
     }
 
-    // 파일 다운로드
-    @GetMapping("/download/{fileName}")
-    public ResponseEntity<?> downloadFile(@PathVariable String fileName) {
+    @GetMapping("/download/{origFilename}")
+    public ResponseEntity<?> downloadFile(@PathVariable("origFilename") String origFilename) {
         try {
-            Resource resource = fileService.downloadFile(fileName);
+            String decodedFilename = URLDecoder.decode(origFilename, StandardCharsets.UTF_8.toString()).replaceAll("[\\n\\r]", "");
+            System.out.println("Decoded filename: " + decodedFilename);
+
+            Resource resource = fileService.downloadFile(decodedFilename);
             String contentType;
             try {
                 contentType = fileService.getContentType(resource.getFile().toPath());
@@ -313,7 +322,12 @@ public class BoardController {
                     .contentType(MediaType.parseMediaType(contentType))
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
                     .body(resource);
+        } catch (IOException e) {
+            System.out.println("File processing error: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResultDTO<String>().makeResult(HttpStatus.INTERNAL_SERVER_ERROR, "File processing error", e.getMessage(), "error"));
         } catch (Exception e) {
+            System.out.println("File not found: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ResultDTO<String>().makeResult(HttpStatus.NOT_FOUND, "File not found", e.getMessage(), "error"));
         }
