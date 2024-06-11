@@ -31,7 +31,7 @@ public class NoticeListService {
         for (Notice notice : noticePage.getContent()) {
             NoticeListResponseDTO responseDTO = NoticeListResponseDTO.builder()
                     .noticeId(notice.getId())
-                    .title(notice.getContent())
+                    .title(notice.getTitle())
                     .userName(notice.getUser().getUserName())
                     .createDate(notice.getCreateDate())
                     .build();
