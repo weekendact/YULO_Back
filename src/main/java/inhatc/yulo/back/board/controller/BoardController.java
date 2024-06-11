@@ -9,8 +9,12 @@ import lombok.RequiredArgsConstructor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,6 +44,7 @@ public class BoardController {
     private final NoticeDetailService noticeDetailService;
     private final NoticeListService noticeListService;
     private final UserInfoService userInfoService;
+    private final FileService fileService;
 
 
     // 게시글 쓰기
@@ -289,6 +294,28 @@ public class BoardController {
             return new ResultDTO<>().makeResult(HttpStatus.OK, "User info retrieved successfully", userInfoResponseDTO, "data");
         } catch (IllegalArgumentException e) {
             return new ResultDTO<>().makeResult(HttpStatus.NOT_FOUND, "User not found", null, "error");
+        }
+    }
+
+    // 파일 다운로드
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<?> downloadFile(@PathVariable String fileName) {
+        try {
+            Resource resource = fileService.downloadFile(fileName);
+            String contentType;
+            try {
+                contentType = fileService.getContentType(resource.getFile().toPath());
+            } catch (IOException e) {
+                contentType = "application/octet-stream";
+            }
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ResultDTO<String>().makeResult(HttpStatus.NOT_FOUND, "File not found", e.getMessage(), "error"));
         }
     }
 }
