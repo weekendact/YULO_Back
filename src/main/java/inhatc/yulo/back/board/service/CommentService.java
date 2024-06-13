@@ -56,6 +56,7 @@ public class CommentService {
                 .id(savedComment.getId())
                 .userName(savedComment.getUser().getUserName())
                 .content(savedComment.getContent())
+                .userId(savedComment.getUser().getUserId())
                 .createDate(savedComment.getCreateDate())
                 .build();
     }

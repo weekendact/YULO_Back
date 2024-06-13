@@ -21,4 +21,9 @@ public class GraphController {
 
     }
 
+    @PostMapping("/newGraph")
+    public ResultDTO<?> getNewGraph(@RequestBody GraphListRequestDTO graphListRequestDTO) {
+        return new ResultDTO<>().makeResult(HttpStatus.OK, "data", graphListService.findNewGraph(graphListRequestDTO), "data");
+    }
+
 }
