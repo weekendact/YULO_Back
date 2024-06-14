@@ -39,7 +39,7 @@ public class BoardListService {
             List<String> imageUrls = new ArrayList<>();
             for (File file : files) {
                 if (file.getOrigFilename().matches(".*\\.(jpg|jpeg|png|gif)$")) { // 이미지 파일만 필터링
-                    imageUrls.add(file.getFilePath());
+                    imageUrls.add(file.getOrigFilename());
                 }
             }
 
